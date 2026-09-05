@@ -31,20 +31,29 @@ a{color:inherit;text-decoration:none}
   display:flex;align-items:center;gap:14px;
   padding:10px 22px;
 }
-.site-header img.logo{height:50px;width:auto;display:block}
+.site-header img.logo{height:66px;width:auto;display:block}
 .brand{display:flex;flex-direction:column;line-height:1.1}
-.brand .name{font-weight:800;color:var(--navy);font-size:1.05rem;letter-spacing:.2px}
-.brand .tag{font-size:.78rem;color:var(--muted)}
+.brand .name{font-weight:800;color:var(--navy);font-size:1.25rem;letter-spacing:.2px}
+.brand .tag{font-size:.82rem;color:var(--muted)}
 .site-header .spacer{flex:1}
-.site-header .contact{font-size:.85rem;color:var(--navy);font-weight:600}
+.site-header .contact{
+  font-size:.9rem;color:#fff;font-weight:700;background:#25D366;
+  padding:9px 16px;border-radius:22px;display:inline-flex;align-items:center;gap:7px;
+}
+.site-header .contact:hover{background:#1eb457}
 
 /* ---- hero (azul marino → carbón) ---- */
 .hero{
   background:linear-gradient(135deg,var(--navy) 0%,var(--charcoal) 100%);
   color:var(--white);
-  padding:56px 22px 64px;
+  padding:48px 22px 60px;
   text-align:center;
 }
+.hero-logo{
+  background:#fff;border-radius:18px;padding:16px 22px;display:inline-block;
+  box-shadow:0 8px 30px rgba(0,0,0,.25);margin-bottom:26px;
+}
+.hero-logo img{height:120px;width:auto;display:block}
 .hero h1{margin:0 0 10px;font-size:2.05rem;font-weight:800;letter-spacing:.3px}
 .hero .lead{margin:0 auto 18px;max-width:720px;font-size:1.08rem;color:#dfe6f1}
 .hero .disclaimer{

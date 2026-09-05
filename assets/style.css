@@ -1,0 +1,122 @@
+/* ===== f'c estructural — portafolio ===== */
+:root{
+  --navy:      #14294a;   /* azul marino del logo (f'c) */
+  --navy-2:    #24476f;   /* azul marino claro */
+  --charcoal:  #2b2f36;   /* gris carbón del logo (estructural) */
+  --ink:       #1b1f24;
+  --paper:     #f5f7fa;
+  --line:      #e3e7ee;
+  --muted:     #6b7480;
+  --white:     #ffffff;
+  --accent:    #2f6fb0;   /* azul de acción */
+  --shadow:    0 6px 22px rgba(20,41,74,.10);
+  --radius:    14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.5;
+}
+a{color:inherit;text-decoration:none}
+
+/* ---- barra superior (blanca, con logo) ---- */
+.site-header{
+  position:sticky;top:0;z-index:20;
+  background:var(--white);
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:14px;
+  padding:10px 22px;
+}
+.site-header img.logo{height:50px;width:auto;display:block}
+.brand{display:flex;flex-direction:column;line-height:1.1}
+.brand .name{font-weight:800;color:var(--navy);font-size:1.05rem;letter-spacing:.2px}
+.brand .tag{font-size:.78rem;color:var(--muted)}
+.site-header .spacer{flex:1}
+.site-header .contact{font-size:.85rem;color:var(--navy);font-weight:600}
+
+/* ---- hero (azul marino → carbón) ---- */
+.hero{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--charcoal) 100%);
+  color:var(--white);
+  padding:56px 22px 64px;
+  text-align:center;
+}
+.hero h1{margin:0 0 10px;font-size:2.05rem;font-weight:800;letter-spacing:.3px}
+.hero .lead{margin:0 auto 18px;max-width:720px;font-size:1.08rem;color:#dfe6f1}
+.hero .disclaimer{
+  margin:20px auto 0;max-width:640px;
+  font-size:.82rem;color:#b9c4d6;
+  border-top:1px solid rgba(255,255,255,.15);padding-top:14px;
+}
+.hero .kpis{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:8px}
+.hero .kpi{text-align:center}
+.hero .kpi b{display:block;font-size:1.6rem;color:#fff}
+.hero .kpi span{font-size:.78rem;color:#b9c4d6;text-transform:uppercase;letter-spacing:.6px}
+
+/* ---- sección de modelos ---- */
+.section-title{
+  text-align:center;margin:44px 22px 6px;font-size:1.35rem;color:var(--navy);font-weight:800;
+}
+.section-sub{text-align:center;color:var(--muted);margin:0 22px 26px;font-size:.95rem}
+
+.models{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:24px;
+  max-width:1200px;margin:0 auto;padding:0 22px 60px;
+}
+
+/* ---- tarjeta ---- */
+.card{
+  background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;
+  transition:transform .15s ease,box-shadow .15s ease;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(20,41,74,.16)}
+.card .thumb{
+  width:100%;aspect-ratio:4/3;object-fit:cover;background:#eaeef5;display:block;
+  border-bottom:1px solid var(--line);
+}
+.card-body{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+.card h3{margin:0 0 2px;font-size:1.12rem;color:var(--navy)}
+.card .loc{color:var(--muted);font-size:.86rem;margin-bottom:12px}
+.star{color:#e0a400}
+
+/* datos técnicos */
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin:0 0 14px}
+.spec{display:flex;flex-direction:column}
+.spec label{font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+.spec b{font-size:.95rem;color:var(--ink);font-weight:600}
+
+/* pie de tarjeta: acciones + QR */
+.card-foot{margin-top:auto;display:flex;gap:12px;align-items:flex-end;justify-content:space-between}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.btn{
+  font-size:.83rem;font-weight:600;padding:8px 12px;border-radius:9px;border:1px solid var(--navy);
+  cursor:pointer;transition:background .15s,color .15s;white-space:nowrap;
+}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:var(--navy-2)}
+.btn-outline{background:#fff;color:var(--navy)}
+.btn-outline:hover{background:var(--paper)}
+.qr-box{text-align:center;flex-shrink:0}
+.qr-box img{width:78px;height:78px;display:block;border:1px solid var(--line);border-radius:8px}
+.qr-box span{font-size:.62rem;color:var(--muted);display:block;margin-top:3px;max-width:78px}
+
+/* ---- footer ---- */
+.site-footer{
+  background:var(--charcoal);color:#c7ccd4;text-align:center;padding:30px 22px;font-size:.86rem;
+}
+.site-footer a{color:#dfe6f1;font-weight:600}
+.site-footer .disc{max-width:660px;margin:10px auto 0;font-size:.76rem;color:#9aa2ad}
+
+@media (max-width:480px){
+  .hero h1{font-size:1.6rem}
+  .site-header{padding:8px 14px}
+  .site-header img.logo{height:40px}
+  .models{padding:0 14px 40px}
+}

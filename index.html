@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>f'c estructural — Portafolio de modelos 3D</title>
+<meta name="description" content="Modelos estructurales 3D interactivos (análisis + visualización) replicados con motor propio OpenSeesPy + Plotly. CFE y NTC-2023.">
+<meta property="og:title" content="f'c estructural — Portafolio de modelos 3D">
+<meta property="og:description" content="Análisis y visualización estructural 3D con motor propio. CFE y NTC-2023.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <img class="logo" src="assets/logo_fcr.jpg" alt="f'c estructural">
+  <div class="brand">
+    <span class="name">f'c estructural</span>
+    <span class="tag">Análisis y visualización estructural</span>
+  </div>
+  <div class="spacer"></div>
+  <a class="contact" href="mailto:fcisnerosr@outlook.es">Contacto</a>
+</header>
+
+<section class="hero">
+  <h1>Modelos estructurales 3D interactivos</h1>
+  <p class="lead">
+    Cada proyecto es un modelo navegable en tu navegador: geometría extruida, cargas,
+    deformada, formas modales, envolvente de elementos mecánicos, muros y losa por
+    elemento finito — construido con un <b>motor propio</b> de análisis y visualización.
+  </p>
+  <div class="kpis">
+    <div class="kpi"><b>5</b><span>modelos</span></div>
+    <div class="kpi"><b>OpenSeesPy + Plotly</b><span>motor propio</span></div>
+    <div class="kpi"><b>CFE · NTC-2023</b><span>normativa mexicana</span></div>
+  </div>
+  <p class="disclaimer">
+    Modelos de <b>demostración</b> replicados con mi propio motor de análisis y
+    visualización 3D. No representan proyectos entregados a clientes; su fin es mostrar
+    las capacidades de la herramienta.
+  </p>
+</section>
+
+<h2 class="section-title">Portafolio de modelos</h2>
+<p class="section-sub">Toca <b>Visor 3D</b> para explorar, o escanea el QR para abrirlo en tu celular.</p>
+
+<main class="models">
+
+  <!-- ===== Casa Juan Carlos Aragón ===== -->
+  <article class="card">
+    <img class="thumb" src="modelos/casa-aragon/img/modelo_3d_extruido.png" alt="Casa Juan Carlos Aragón — modelo 3D extruido">
+    <div class="card-body">
+      <h3>Casa Juan Carlos Aragón <span class="star">★</span></h3>
+      <div class="loc">📍 Oaxaca, México</div>
+      <div class="specs">
+        <div class="spec"><label>Niveles</label><b>2</b></div>
+        <div class="spec"><label>Periodo T₁</label><b>0.88 s</b></div>
+        <div class="spec"><label>Norma</label><b>CFE-DS + NTC-2023</b></div>
+        <div class="spec"><label>Cortante Vb/W</label><b>0.61 (Q=2)</b></div>
+        <div class="spec"><label>Zona / Terreno</label><b>D / II</b></div>
+        <div class="spec"><label>Cimentación</label><b>Zapatas corridas</b></div>
+      </div>
+      <div class="card-foot">
+        <div class="actions">
+          <a class="btn btn-primary" href="modelos/casa-aragon/visor_modelo.html">Visor 3D</a>
+          <a class="btn btn-outline" href="modelos/casa-aragon/visor_modos.html">Modos</a>
+          <a class="btn btn-outline" href="modelos/casa-aragon/memoria_calculo.pdf">Memoria</a>
+        </div>
+        <div class="qr-box">
+          <img src="assets/qr/casa-aragon.png" alt="QR Casa Aragón">
+          <span>escanéame</span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== Oficinas Morsa ===== -->
+  <article class="card">
+    <img class="thumb" src="modelos/oficinas-morsa/img/modelo_3d_extruido.png" alt="Oficinas Morsa — modelo 3D extruido">
+    <div class="card-body">
+      <h3>Oficinas Morsa</h3>
+      <div class="loc">📍 Veracruz, México</div>
+      <div class="specs">
+        <div class="spec"><label>Niveles</label><b>3</b></div>
+        <div class="spec"><label>Periodo T₁</label><b>—</b></div>
+        <div class="spec"><label>Norma</label><b>NTC-2017</b></div>
+        <div class="spec"><label>Cortante Vb/W</label><b>0.36 (Q=2)</b></div>
+        <div class="spec"><label>Zona / Terreno</label><b>C / III</b></div>
+        <div class="spec"><label>Cimentación</label><b>Losa de cimentación</b></div>
+      </div>
+      <div class="card-foot">
+        <div class="actions">
+          <a class="btn btn-primary" href="modelos/oficinas-morsa/visor_modelo.html">Visor 3D</a>
+          <a class="btn btn-outline" href="modelos/oficinas-morsa/visor_modos.html">Modos</a>
+          <a class="btn btn-outline" href="modelos/oficinas-morsa/memoria_calculo.pdf">Memoria</a>
+        </div>
+        <div class="qr-box">
+          <img src="assets/qr/oficinas-morsa.png" alt="QR Oficinas Morsa">
+          <span>escanéame</span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== Edificio de departamentos (Guerrero) ===== -->
+  <article class="card">
+    <img class="thumb" src="modelos/edificio-guerrero/img/modelo_3d_extruido.png" alt="Edificio de departamentos — modelo 3D extruido">
+    <div class="card-body">
+      <h3>Edificio de departamentos</h3>
+      <div class="loc">📍 Guerrero, México</div>
+      <div class="specs">
+        <div class="spec"><label>Niveles</label><b>6 (sistema dual)</b></div>
+        <div class="spec"><label>Periodo T₁</label><b>1.25 s</b></div>
+        <div class="spec"><label>Norma</label><b>CFE (Q=4)</b></div>
+        <div class="spec"><label>Cortante Vb/W</label><b>0.23</b></div>
+        <div class="spec"><label>Zona / Terreno</label><b>C / III</b></div>
+        <div class="spec"><label>f'c</label><b>210 kg/cm²</b></div>
+      </div>
+      <div class="card-foot">
+        <div class="actions">
+          <a class="btn btn-primary" href="modelos/edificio-guerrero/visor_modelo.html">Visor 3D</a>
+          <a class="btn btn-outline" href="modelos/edificio-guerrero/visor_modos.html">Modos</a>
+          <a class="btn btn-outline" href="modelos/edificio-guerrero/memoria_calculo.pdf">Memoria</a>
+        </div>
+        <div class="qr-box">
+          <img src="assets/qr/edificio-guerrero.png" alt="QR Edificio Guerrero">
+          <span>escanéame</span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== Casa Carolina ===== -->
+  <article class="card">
+    <img class="thumb" src="modelos/casa-carolina/img/modelo_3d_extruido.png" alt="Casa Carolina — modelo 3D extruido">
+    <div class="card-body">
+      <h3>Casa Carolina</h3>
+      <div class="loc">📍 México</div>
+      <div class="specs">
+        <div class="spec"><label>Niveles</label><b>2</b></div>
+        <div class="spec"><label>Periodo T₁</label><b>0.86 s</b></div>
+        <div class="spec"><label>Norma</label><b>NTC-2023</b></div>
+        <div class="spec"><label>Cortante Vb/W</label><b>0.51 (Q=2)</b></div>
+        <div class="spec"><label>Zona / Terreno</label><b>C / II</b></div>
+        <div class="spec"><label>Cimentación</label><b>Zapatas corridas</b></div>
+      </div>
+      <div class="card-foot">
+        <div class="actions">
+          <a class="btn btn-primary" href="modelos/casa-carolina/visor_modelo.html">Visor 3D</a>
+          <a class="btn btn-outline" href="modelos/casa-carolina/visor_modos.html">Modos</a>
+          <a class="btn btn-outline" href="modelos/casa-carolina/memoria_calculo.pdf">Memoria</a>
+        </div>
+        <div class="qr-box">
+          <img src="assets/qr/casa-carolina.png" alt="QR Casa Carolina">
+          <span>escanéame</span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== Tanque elevado (Oaxaca) ===== -->
+  <article class="card">
+    <img class="thumb" src="modelos/tanque-oaxaca/img/modelo_3d_extruido.png" alt="Tanque elevado — torre de soporte 3D">
+    <div class="card-body">
+      <h3>Tanque elevado — torre de soporte</h3>
+      <div class="loc">📍 Juchitán de Zaragoza, Oaxaca</div>
+      <div class="specs">
+        <div class="spec"><label>Niveles</label><b>5 + cuba 70 m³</b></div>
+        <div class="spec"><label>Periodo T₁</label><b>0.77 s</b></div>
+        <div class="spec"><label>Norma</label><b>CFE (Q=2)</b></div>
+        <div class="spec"><label>Cortante Vb/W</label><b>0.68</b></div>
+        <div class="spec"><label>Zona / Terreno</label><b>D / II</b></div>
+        <div class="spec"><label>Altura</label><b>19.1 m</b></div>
+      </div>
+      <div class="card-foot">
+        <div class="actions">
+          <a class="btn btn-primary" href="modelos/tanque-oaxaca/visor_modelo.html">Visor 3D</a>
+          <a class="btn btn-outline" href="modelos/tanque-oaxaca/visor_modos.html">Modos</a>
+          <a class="btn btn-outline" href="modelos/tanque-oaxaca/memoria_calculo.pdf">Memoria</a>
+        </div>
+        <div class="qr-box">
+          <img src="assets/qr/tanque-oaxaca.png" alt="QR Tanque Oaxaca">
+          <span>escanéame</span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<footer class="site-footer">
+  <div><b>f'c estructural</b> — análisis y visualización estructural 3D · <a href="mailto:fcisnerosr@outlook.es">fcisnerosr@outlook.es</a></div>
+  <p class="disc">
+    Modelos de demostración replicados con motor propio (OpenSeesPy + Plotly). Los muros se
+    modelan como carga sin rigidez lateral, por lo que los periodos pueden diferir de la
+    estructura real con muros rígidos. No representan proyectos entregados a clientes.
+  </p>
+</footer>
+
+</body>
+</html>

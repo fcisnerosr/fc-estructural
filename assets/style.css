@@ -1,4 +1,4 @@
-/* ===== f'c estructural — portafolio ===== */
+/* ===== f'c estructural — portafolio / landing ===== */
 :root{
   --navy:      #14294a;   /* azul marino del logo (f'c) */
   --navy-2:    #24476f;   /* azul marino claro */
@@ -18,68 +18,111 @@ body{
   margin:0;
   font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
   color:var(--ink);
-  background:var(--paper);
-  line-height:1.5;
+  background:var(--white);
+  line-height:1.55;
 }
 a{color:inherit;text-decoration:none}
+img{max-width:100%}
+.wrap{max-width:1200px;margin:0 auto;padding:0 22px}
 
-/* ---- barra superior (blanca, con logo) ---- */
-.site-header{
-  position:sticky;top:0;z-index:20;
-  background:var(--white);
+/* ======================= NAV (fija, blanca) ======================= */
+.nav{
+  position:sticky;top:0;z-index:40;
+  background:rgba(255,255,255,.96);backdrop-filter:blur(6px);
   border-bottom:1px solid var(--line);
-  display:flex;align-items:center;gap:14px;
-  padding:10px 22px;
 }
-.site-header img.logo{height:66px;width:auto;display:block}
-.brand{display:flex;flex-direction:column;line-height:1.1}
-.brand .name{font-weight:800;color:var(--navy);font-size:1.25rem;letter-spacing:.2px}
-.brand .tag{font-size:.82rem;color:var(--muted)}
-.site-header .spacer{flex:1}
-.site-header .contact{
+.nav-inner{
+  max-width:1200px;margin:0 auto;padding:9px 22px;
+  display:flex;align-items:center;gap:16px;
+}
+.nav .logo{height:56px;width:auto;display:block}
+.nav .brand{display:flex;flex-direction:column;line-height:1.05}
+.nav .brand .name{font-weight:800;color:var(--navy);font-size:1.18rem;letter-spacing:.2px}
+.nav .brand .tag{font-size:.76rem;color:var(--muted)}
+.nav .spacer{flex:1}
+.nav .links{display:flex;gap:22px;align-items:center}
+.nav .links a{
+  font-size:.92rem;font-weight:600;color:var(--charcoal);
+  padding:6px 2px;border-bottom:2px solid transparent;transition:border-color .15s,color .15s;
+}
+.nav .links a:hover{color:var(--navy);border-bottom-color:var(--accent)}
+.btn-wa{
   font-size:.9rem;color:#fff;font-weight:700;background:#25D366;
-  padding:9px 16px;border-radius:22px;display:inline-flex;align-items:center;gap:7px;
+  padding:9px 16px;border-radius:22px;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
 }
-.site-header .contact:hover{background:#1eb457}
+.btn-wa:hover{background:#1eb457}
 
-/* ---- hero (azul marino → carbón) ---- */
+/* ======================= HERO (foto + overlay) ======================= */
 .hero{
-  background:linear-gradient(135deg,var(--navy) 0%,var(--charcoal) 100%);
-  color:var(--white);
-  padding:48px 22px 60px;
-  text-align:center;
+  position:relative;
+  min-height:78vh;
+  display:flex;align-items:center;
+  color:#fff;
+  background:
+    linear-gradient(105deg,rgba(20,41,74,.90) 0%,rgba(20,41,74,.66) 46%,rgba(43,47,54,.45) 100%),
+    url("img/edificio_concreto.webp") center/cover no-repeat;
 }
-.hero-logo{
-  background:#fff;border-radius:18px;padding:16px 22px;display:inline-block;
-  box-shadow:0 8px 30px rgba(0,0,0,.25);margin-bottom:26px;
+.hero-content{max-width:1200px;margin:0 auto;padding:70px 22px;width:100%}
+.hero .eyebrow{
+  text-transform:uppercase;letter-spacing:2.5px;font-size:.8rem;font-weight:700;
+  color:#8fb5e6;margin:0 0 14px;
 }
-.hero-logo img{height:120px;width:auto;display:block}
-.hero h1{margin:0 0 10px;font-size:2.05rem;font-weight:800;letter-spacing:.3px}
-.hero .lead{margin:0 auto 18px;max-width:720px;font-size:1.08rem;color:#dfe6f1}
-.hero .disclaimer{
-  margin:20px auto 0;max-width:640px;
-  font-size:.82rem;color:#b9c4d6;
-  border-top:1px solid rgba(255,255,255,.15);padding-top:14px;
+.hero h1{
+  margin:0 0 16px;font-size:clamp(2.1rem,5vw,3.4rem);font-weight:800;line-height:1.1;max-width:760px;
 }
-.hero .kpis{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:8px}
-.hero .kpi{text-align:center}
-.hero .kpi b{display:block;font-size:1.6rem;color:#fff}
-.hero .kpi span{font-size:.78rem;color:#b9c4d6;text-transform:uppercase;letter-spacing:.6px}
+.hero .lead{margin:0 0 28px;max-width:600px;font-size:1.12rem;color:#e2e9f4}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn-lg{
+  font-size:.98rem;font-weight:700;padding:13px 26px;border-radius:8px;
+  display:inline-flex;align-items:center;gap:8px;border:2px solid transparent;transition:.15s;
+}
+.btn-solid{background:var(--accent);color:#fff}
+.btn-solid:hover{background:#2a6099}
+.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
+.btn-ghost:hover{background:rgba(255,255,255,.12);border-color:#fff}
 
-/* ---- sección de modelos ---- */
-.section-title{
-  text-align:center;margin:44px 22px 6px;font-size:1.35rem;color:var(--navy);font-weight:800;
+/* ======================= FRANJA KPIs ======================= */
+.kpis{
+  background:var(--navy);color:#fff;
 }
-.section-sub{text-align:center;color:var(--muted);margin:0 22px 26px;font-size:.95rem}
+.kpis .wrap{
+  display:flex;justify-content:center;gap:52px;flex-wrap:wrap;
+  padding:26px 22px;text-align:center;
+}
+.kpis .kpi b{display:block;font-size:1.5rem;font-weight:800}
+.kpis .kpi span{font-size:.74rem;color:#a9bad4;text-transform:uppercase;letter-spacing:.8px}
 
+/* ======================= SECCIONES genéricas ======================= */
+.section{padding:66px 0}
+.section.alt{background:var(--paper)}
+.section-head{text-align:center;max-width:720px;margin:0 auto 40px}
+.section-head .eyebrow{
+  text-transform:uppercase;letter-spacing:2px;font-size:.78rem;font-weight:700;color:var(--accent);margin:0 0 8px;
+}
+.section-head h2{margin:0 0 10px;font-size:1.7rem;color:var(--navy);font-weight:800}
+.section-head p{margin:0;color:var(--muted);font-size:1rem}
+
+/* ======================= SERVICIOS ======================= */
+.services{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;
+}
+.svc{
+  background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px 22px;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s;
+}
+.svc:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(20,41,74,.16)}
+.svc .ico{
+  width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;font-size:1.5rem;margin-bottom:16px;
+}
+.svc h3{margin:0 0 8px;font-size:1.12rem;color:var(--navy)}
+.svc p{margin:0;color:var(--muted);font-size:.92rem}
+
+/* ======================= PROYECTOS (tarjetas modelo) ======================= */
+.section-sub{text-align:center;color:var(--muted);margin:-26px auto 34px;font-size:.95rem;max-width:640px}
 .models{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
-  gap:24px;
-  max-width:1200px;margin:0 auto;padding:0 22px 60px;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;
 }
-
-/* ---- tarjeta ---- */
 .card{
   background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
   overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;
@@ -94,14 +137,10 @@ a{color:inherit;text-decoration:none}
 .card h3{margin:0 0 2px;font-size:1.12rem;color:var(--navy)}
 .card .loc{color:var(--muted);font-size:.86rem;margin-bottom:12px}
 .star{color:#e0a400}
-
-/* datos técnicos */
 .specs{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin:0 0 14px}
 .spec{display:flex;flex-direction:column}
 .spec label{font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
 .spec b{font-size:.95rem;color:var(--ink);font-weight:600}
-
-/* pie de tarjeta: acciones + QR */
 .card-foot{margin-top:auto;display:flex;gap:12px;align-items:flex-end;justify-content:space-between}
 .actions{display:flex;flex-wrap:wrap;gap:8px}
 .btn{
@@ -116,16 +155,71 @@ a{color:inherit;text-decoration:none}
 .qr-box img{width:78px;height:78px;display:block;border:1px solid var(--line);border-radius:8px}
 .qr-box span{font-size:.62rem;color:var(--muted);display:block;margin-top:3px;max-width:78px}
 
-/* ---- footer ---- */
+/* ======================= PERFIL ======================= */
+.profile{display:grid;grid-template-columns:0.9fr 1.1fr;gap:44px;align-items:center}
+.profile .photos{position:relative}
+.profile .photos .main{
+  width:100%;border-radius:var(--radius);box-shadow:var(--shadow);display:block;
+  aspect-ratio:4/5;object-fit:cover;object-position:center top;
+}
+.profile .photos .mini{
+  position:absolute;right:-14px;bottom:-18px;width:42%;
+  border-radius:12px;border:4px solid #fff;box-shadow:0 8px 24px rgba(20,41,74,.22);
+  aspect-ratio:4/3;object-fit:cover;
+}
+.profile h2{margin:0 0 6px;font-size:1.7rem;color:var(--navy);font-weight:800}
+.profile .role{color:var(--accent);font-weight:700;font-size:.98rem;margin:0 0 16px}
+.profile p{margin:0 0 14px;color:#3a4048;font-size:1rem}
+.profile ul{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.profile li{position:relative;padding-left:26px;color:#3a4048;font-size:.96rem}
+.profile li::before{content:"▸";position:absolute;left:2px;color:var(--accent);font-weight:800}
+
+/* ======================= MÉTODO ======================= */
+.method{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+.method .shot{
+  width:100%;border-radius:var(--radius);box-shadow:var(--shadow);
+  aspect-ratio:16/10;object-fit:cover;display:block;
+}
+.method h2{margin:0 0 6px;font-size:1.7rem;color:var(--navy);font-weight:800}
+.method .role{color:var(--accent);font-weight:700;font-size:.98rem;margin:0 0 18px}
+.steps{margin:0;padding:0;list-style:none;counter-reset:step;display:grid;gap:16px}
+.steps li{position:relative;padding-left:52px;min-height:38px}
+.steps li::before{
+  counter-increment:step;content:counter(step);
+  position:absolute;left:0;top:0;width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;
+}
+.steps li b{display:block;color:var(--navy);font-size:1rem}
+.steps li span{color:var(--muted);font-size:.92rem}
+
+/* ======================= CONTACTO ======================= */
+.contact-band{
+  background:
+    linear-gradient(135deg,rgba(20,41,74,.94) 0%,rgba(43,47,54,.88) 100%),
+    url("img/planos.png") center/cover no-repeat;
+  color:#fff;text-align:center;
+}
+.contact-band .wrap{padding:58px 22px}
+.contact-band h2{margin:0 0 12px;font-size:1.7rem;font-weight:800}
+.contact-band p{margin:0 auto 26px;max-width:560px;color:#dbe3f0}
+
+/* ======================= FOOTER ======================= */
 .site-footer{
-  background:var(--charcoal);color:#c7ccd4;text-align:center;padding:30px 22px;font-size:.86rem;
+  background:var(--charcoal);color:#c7ccd4;text-align:center;padding:34px 22px;font-size:.86rem;
 }
 .site-footer a{color:#dfe6f1;font-weight:600}
-.site-footer .disc{max-width:660px;margin:10px auto 0;font-size:.76rem;color:#9aa2ad}
+.site-footer .disc{max-width:680px;margin:12px auto 0;font-size:.76rem;color:#9aa2ad}
 
-@media (max-width:480px){
-  .hero h1{font-size:1.6rem}
-  .site-header{padding:8px 14px}
-  .site-header img.logo{height:40px}
-  .models{padding:0 14px 40px}
+/* ======================= RESPONSIVE ======================= */
+@media (max-width:860px){
+  .profile{grid-template-columns:1fr;gap:56px}
+  .profile .photos{max-width:420px;margin:0 auto}
+  .method{grid-template-columns:1fr;gap:26px}
+}
+@media (max-width:680px){
+  .nav .links{display:none}
+  .nav .logo{height:44px}
+  .hero{min-height:66vh}
+  .kpis .wrap{gap:28px}
 }

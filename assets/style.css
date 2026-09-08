@@ -228,41 +228,61 @@ img{max-width:100%}
 .verify-link{color:var(--accent);font-weight:600;white-space:nowrap}
 .verify-link:hover{text-decoration:underline}
 
-/* ======================= MODO OSCURO (sincronizado con el sistema) ======================= */
-@media (prefers-color-scheme: dark){
-  :root{
-    --ink:#e6ebf2;
-    --paper:#10171f;      /* fondo de secciones alternas */
-    --line:#273241;
-    --muted:#97a3b3;
-    --accent:#5a97db;     /* acento más brillante para fondo oscuro */
-    --shadow:0 6px 22px rgba(0,0,0,.5);
-  }
-  body{background:#0d141c;color:var(--ink)}
-
-  /* nav */
-  .nav{background:rgba(15,22,30,.94);border-bottom-color:var(--line)}
-  .nav .brand .name{color:#e6ebf2}
-  .nav .links a{color:#c3cdda}
-  .nav .links a:hover{color:#fff}
-  .nav .logo{border-radius:8px}   /* logo de fondo blanco → insignia redondeada */
-
-  /* superficies claras → oscuras */
-  .card,.svc{background:#151d28;border-color:var(--line)}
-  .card .thumb{background:#0f1620;border-bottom-color:var(--line)}
-  .section.alt{background:#10171f}
-
-  /* títulos y textos */
-  .section-head h2,.card h3,.svc h3,.profile h2,.method h2,.steps li b,.spec b{color:#e6ebf2}
-  .profile p{color:#c7d1de}
-
-  /* botones */
-  .btn-outline{background:#151d28;color:#cdd8e6;border-color:#3a4b60}
-  .btn-outline:hover{background:#1c2634}
-  .btn-primary{background:#24476f;border-color:#24476f}
-  .btn-primary:hover{background:#2d5787}
-
-  /* QR: fondo blanco para que siga escaneando sobre tarjeta oscura */
-  .qr-box img{background:#fff;padding:4px}
+/* ======================= BOTÓN DE TEMA ======================= */
+.theme-toggle{
+  background:transparent;border:1px solid var(--line);border-radius:50%;
+  width:40px;height:40px;cursor:pointer;font-size:1.05rem;line-height:1;
+  display:inline-flex;align-items:center;justify-content:center;color:var(--charcoal);
+  transition:background .15s,border-color .15s;
 }
+.theme-toggle:hover{background:var(--paper)}
+
+/* ======================= MODO OSCURO =======================
+   Se activa con html[data-theme="dark"]. Un script fija el tema inicial según
+   la preferencia guardada o la del sistema (prefers-color-scheme), y el botón
+   🌙/☀️ lo alterna. */
+html[data-theme="dark"]{
+  --ink:#e6ebf2;
+  --paper:#10171f;        /* fondo de secciones alternas */
+  --line:#273241;
+  --muted:#97a3b3;
+  --accent:#5a97db;       /* acento más brillante para fondo oscuro */
+  --shadow:0 6px 22px rgba(0,0,0,.5);
+  background:#0d141c;
+}
+html[data-theme="dark"] body{background:#0d141c;color:var(--ink)}
+
+/* nav */
+html[data-theme="dark"] .nav{background:rgba(15,22,30,.94);border-bottom-color:var(--line)}
+html[data-theme="dark"] .nav .brand .name{color:#e6ebf2}
+html[data-theme="dark"] .nav .links a{color:#c3cdda}
+html[data-theme="dark"] .nav .links a:hover{color:#fff}
+html[data-theme="dark"] .nav .logo{border-radius:8px}   /* logo de fondo blanco → insignia */
+html[data-theme="dark"] .theme-toggle{color:#e6ebf2;border-color:#3a4b60}
+html[data-theme="dark"] .theme-toggle:hover{background:#1c2634}
+
+/* superficies claras → oscuras */
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .svc{background:#151d28;border-color:var(--line)}
+html[data-theme="dark"] .card .thumb{background:#0f1620;border-bottom-color:var(--line)}
+html[data-theme="dark"] .section.alt{background:#10171f}
+
+/* títulos y textos */
+html[data-theme="dark"] .section-head h2,
+html[data-theme="dark"] .card h3,
+html[data-theme="dark"] .svc h3,
+html[data-theme="dark"] .profile h2,
+html[data-theme="dark"] .method h2,
+html[data-theme="dark"] .steps li b,
+html[data-theme="dark"] .spec b{color:#e6ebf2}
+html[data-theme="dark"] .profile p{color:#c7d1de}
+
+/* botones */
+html[data-theme="dark"] .btn-outline{background:#151d28;color:#cdd8e6;border-color:#3a4b60}
+html[data-theme="dark"] .btn-outline:hover{background:#1c2634}
+html[data-theme="dark"] .btn-primary{background:#24476f;border-color:#24476f}
+html[data-theme="dark"] .btn-primary:hover{background:#2d5787}
+
+/* QR: fondo blanco para que siga escaneando sobre tarjeta oscura */
+html[data-theme="dark"] .qr-box img{background:#fff;padding:4px}
 

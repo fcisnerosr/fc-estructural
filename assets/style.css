@@ -275,7 +275,8 @@ html[data-theme="dark"] .profile h2,
 html[data-theme="dark"] .method h2,
 html[data-theme="dark"] .steps li b,
 html[data-theme="dark"] .spec b{color:#e6ebf2}
-html[data-theme="dark"] .profile p{color:#c7d1de}
+html[data-theme="dark"] .profile p,
+html[data-theme="dark"] .profile li{color:#c7d1de}
 
 /* botones */
 html[data-theme="dark"] .btn-outline{background:#151d28;color:#cdd8e6;border-color:#3a4b60}

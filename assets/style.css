@@ -223,3 +223,46 @@ img{max-width:100%}
   .hero{min-height:66vh}
   .kpis .wrap{gap:28px}
 }
+
+/* ======================= ENLACE DE VERIFICACIÓN ======================= */
+.verify-link{color:var(--accent);font-weight:600;white-space:nowrap}
+.verify-link:hover{text-decoration:underline}
+
+/* ======================= MODO OSCURO (sincronizado con el sistema) ======================= */
+@media (prefers-color-scheme: dark){
+  :root{
+    --ink:#e6ebf2;
+    --paper:#10171f;      /* fondo de secciones alternas */
+    --line:#273241;
+    --muted:#97a3b3;
+    --accent:#5a97db;     /* acento más brillante para fondo oscuro */
+    --shadow:0 6px 22px rgba(0,0,0,.5);
+  }
+  body{background:#0d141c;color:var(--ink)}
+
+  /* nav */
+  .nav{background:rgba(15,22,30,.94);border-bottom-color:var(--line)}
+  .nav .brand .name{color:#e6ebf2}
+  .nav .links a{color:#c3cdda}
+  .nav .links a:hover{color:#fff}
+  .nav .logo{border-radius:8px}   /* logo de fondo blanco → insignia redondeada */
+
+  /* superficies claras → oscuras */
+  .card,.svc{background:#151d28;border-color:var(--line)}
+  .card .thumb{background:#0f1620;border-bottom-color:var(--line)}
+  .section.alt{background:#10171f}
+
+  /* títulos y textos */
+  .section-head h2,.card h3,.svc h3,.profile h2,.method h2,.steps li b,.spec b{color:#e6ebf2}
+  .profile p{color:#c7d1de}
+
+  /* botones */
+  .btn-outline{background:#151d28;color:#cdd8e6;border-color:#3a4b60}
+  .btn-outline:hover{background:#1c2634}
+  .btn-primary{background:#24476f;border-color:#24476f}
+  .btn-primary:hover{background:#2d5787}
+
+  /* QR: fondo blanco para que siga escaneando sobre tarjeta oscura */
+  .qr-box img{background:#fff;padding:4px}
+}
+

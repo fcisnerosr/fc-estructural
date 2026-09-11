@@ -250,7 +250,7 @@ img{max-width:100%}
 .contact-band{
   background:
     linear-gradient(135deg,rgba(20,41,74,.94) 0%,rgba(43,47,54,.88) 100%),
-    url("img/planos.png") center/cover no-repeat;
+    url("img/planos.webp") center/cover no-repeat;
   color:#fff;text-align:center;
 }
 .contact-band .wrap{padding:58px 22px}

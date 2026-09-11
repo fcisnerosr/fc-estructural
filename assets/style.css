@@ -272,10 +272,25 @@ img{max-width:100%}
 }
 .contact-band .wrap{padding:58px 22px}
 .contact-band h2{margin:0 0 12px;font-size:1.7rem;font-weight:800}
-.contact-band p{margin:0 auto 26px;max-width:560px;color:#dbe3f0}
-.contact-qr{margin:32px auto 0;display:flex;flex-direction:column;align-items:center;gap:10px}
-.contact-qr img{width:150px;height:150px;background:#fff;padding:10px;border-radius:12px;box-shadow:0 6px 22px rgba(0,0,0,.28)}
-.contact-qr span{font-size:.8rem;color:#dbe3f0;max-width:190px}
+.contact-band p{margin:0 0 24px;max-width:560px;color:#dbe3f0}
+/* Dos columnas: los canales a la izquierda, el QR con peso propio a la derecha */
+.contact-inner{
+  display:grid;grid-template-columns:1.35fr .65fr;gap:48px;align-items:center;text-align:left;
+}
+.contact-actions{display:flex;gap:14px;flex-wrap:wrap}
+.contact-qr{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.contact-qr img{
+  width:170px;height:170px;background:#fff;padding:11px;border-radius:14px;
+  box-shadow:0 8px 26px rgba(0,0,0,.32);
+}
+.contact-qr span{font-size:.82rem;color:#dbe3f0;max-width:210px;line-height:1.5}
+.contact-qr b{color:#fff;font-size:.9rem}
+
+@media (max-width:820px){
+  .contact-inner{grid-template-columns:1fr;gap:38px;text-align:center}
+  .contact-band p{margin-left:auto;margin-right:auto}
+  .contact-actions{justify-content:center}
+}
 
 /* ======================= FOOTER ======================= */
 .site-footer{background:var(--charcoal);color:#c7ccd4;padding:54px 0 0;font-size:.88rem}

@@ -357,6 +357,38 @@
   for(var j=0;j<items.length;j++) obs.observe(items[j]);
 })();
 
+/* Resalta en el menú la sección en la que está el visitante. */
+(function(){
+  var enlaces=document.querySelectorAll('.nav .links a[href^="#"]');
+  var nav=document.querySelector('.nav');
+  var secs=[];
+  for(var i=0;i<enlaces.length;i++){
+    var destino=document.querySelector(enlaces[i].getAttribute('href'));
+    if(destino) secs.push({enlace:enlaces[i],el:destino});
+  }
+  if(!secs.length)return;
+  var pedido=false, actual=null;
+  function tope(el){return el.getBoundingClientRect().top+window.scrollY;}
+  function marcar(){
+    pedido=false;
+    var linea=window.scrollY+(nav?nav.offsetHeight:0)+24;
+    var elegida=secs[0];
+    for(var i=0;i<secs.length;i++) if(tope(secs[i].el)<=linea) elegida=secs[i];
+    /* al tocar el final de la página gana la última sección, aunque sea corta */
+    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4)
+      elegida=secs[secs.length-1];
+    if(elegida===actual)return;
+    if(actual) actual.enlace.classList.remove('active');
+    elegida.enlace.classList.add('active');
+    actual=elegida;
+  }
+  window.addEventListener('scroll',function(){
+    if(!pedido){pedido=true;requestAnimationFrame(marcar);}
+  },{passive:true});
+  window.addEventListener('resize',marcar,{passive:true});
+  marcar();
+})();
+
 /* Barra de navegación: se compacta al bajar y se expande al volver arriba. */
 (function(){
   var nav=document.querySelector('.nav');

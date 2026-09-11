@@ -241,13 +241,13 @@
   <div class="wrap">
     <div class="profile">
       <div class="photos">
-        <img class="main" src="assets/img/foto_profesional.jpeg" alt="Ing. Francisco Javier Cisneros Ruiz" loading="lazy">
+        <img class="main" src="assets/img/foto_profesional.png" alt="Ing. Francisco Javier Cisneros Ruiz" loading="lazy">
         <img class="mini" src="assets/img/profesor_uv.jpeg" alt="Docencia en la Universidad Veracruzana" loading="lazy">
       </div>
       <div class="text">
         <p class="eyebrow" style="color:var(--accent);text-transform:uppercase;letter-spacing:2px;font-size:.78rem;font-weight:700;margin:0 0 8px">Perfil</p>
         <h2>Ing. Francisco Javier Cisneros Ruiz</h2>
-        <p class="role">Ingeniero estructurista · FCR Ingeniería</p>
+        <p class="role">Fundador y director técnico · f'c estructural</p>
         <p>
           Ingeniero estructurista con maestría en ingeniería estructural por la UNAM y
           experiencia docente en la Universidad Veracruzana. Especializado en el análisis y
@@ -262,9 +262,9 @@
           <li>Maestría en ingeniería estructural por la UNAM</li>
           <li>Cédula profesional (maestría): 15747504
             &nbsp;·&nbsp;<a href="https://cedulaprofesional.sep.gob.mx/cedula/" target="_blank" rel="noopener" class="verify-link">Verificar en el RNP-SEP →</a></li>
-          <li>Docencia en la Universidad Veracruzana</li>
           <li>Análisis y diseño en concreto (NTC-2023) y acero (NTC / IMCA)</li>
           <li>Diseño por sismo y viento conforme al MDOC de la CFE</li>
+          <li>Docencia en la Universidad Veracruzana</li>
         </ul>
       </div>
     </div>
@@ -324,6 +324,21 @@
 </footer>
 
 <script>
+/* Barra de navegación: se compacta al bajar y se expande al volver arriba. */
+(function(){
+  var nav=document.querySelector('.nav');
+  if(!nav)return;
+  var pedido=false;
+  function aplicar(){
+    nav.classList.toggle('scrolled', window.scrollY>60);
+    pedido=false;
+  }
+  window.addEventListener('scroll',function(){
+    if(!pedido){pedido=true;requestAnimationFrame(aplicar);}
+  },{passive:true});
+  aplicar();   /* por si la página se abre ya desplazada */
+})();
+
 /* Botón de tema: alterna claro/oscuro, recuerda la elección y ajusta el ícono. */
 (function(){
   var b=document.getElementById('themeBtn');

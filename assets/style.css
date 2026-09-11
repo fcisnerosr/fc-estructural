@@ -30,15 +30,31 @@ img{max-width:100%}
   position:sticky;top:0;z-index:40;
   background:rgba(255,255,255,.96);backdrop-filter:blur(6px);
   border-bottom:1px solid var(--line);
+  transition:box-shadow .28s ease;
 }
+/* Arriba: la marca se presenta, sin descriptor (el h1 ya lo dice).
+   Al bajar: todo encoge, aparece el descriptor y la barra gana sombra. */
+.nav.scrolled{box-shadow:0 3px 16px rgba(20,41,74,.13)}
 .nav-inner{
-  max-width:1200px;margin:0 auto;padding:9px 22px;
+  max-width:1200px;margin:0 auto;padding:15px 22px;
   display:flex;align-items:center;gap:16px;
+  transition:padding .28s ease;
 }
-.nav .logo{height:56px;width:auto;display:block}
+.nav.scrolled .nav-inner{padding:7px 22px}
+.nav .logo{height:66px;width:auto;display:block;transition:height .28s ease}
+.nav.scrolled .logo{height:40px}
 .nav .brand{display:flex;flex-direction:column;line-height:1.05}
-.nav .brand .name{font-weight:800;color:var(--navy);font-size:1.18rem;letter-spacing:.2px}
-.nav .brand .tag{font-size:.76rem;color:var(--muted)}
+.nav .brand .name{
+  font-weight:800;color:var(--navy);font-size:1.5rem;letter-spacing:.2px;
+  transition:font-size .28s ease;
+}
+.nav.scrolled .brand .name{font-size:1.12rem}
+.nav .brand .tag{
+  font-size:.76rem;color:var(--muted);
+  max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .28s ease,opacity .22s ease;
+}
+.nav.scrolled .brand .tag{max-height:1.5em;opacity:1;margin-top:2px}
 .nav .spacer{flex:1}
 .nav .links{display:flex;gap:22px;align-items:center}
 .nav .links a{
@@ -261,7 +277,12 @@ img{max-width:100%}
   .svc-feature{flex-direction:column;gap:0}
   .svc-feature .ico{margin-bottom:16px}
   .nav .links{display:none}
-  .nav .logo{height:44px}
+  .nav .logo{height:50px}
+  .nav.scrolled .logo{height:34px}
+  .nav .brand .name{font-size:1.22rem}
+  .nav.scrolled .brand .name{font-size:1rem}
+  .nav-inner{padding:10px 16px}
+  .nav.scrolled .nav-inner{padding:6px 16px}
   .hero{min-height:66vh}
   .kpis .wrap{gap:28px}
 }
@@ -333,3 +354,9 @@ html[data-theme="dark"] .btn-primary:hover{background:#2d5787}
 /* QR: fondo blanco para que siga escaneando sobre tarjeta oscura */
 html[data-theme="dark"] .qr-box img{background:#fff;padding:4px}
 
+
+
+/* Quien pide menos movimiento en su sistema, no lo recibe */
+@media (prefers-reduced-motion:reduce){
+  .nav,.nav-inner,.nav .logo,.nav .brand .name,.nav .brand .tag{transition:none}
+}

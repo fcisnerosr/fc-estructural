@@ -59,14 +59,21 @@ img{max-width:100%}
 .nav .links{display:flex;gap:22px;align-items:center}
 .nav .links a{
   font-size:.92rem;font-weight:600;color:var(--charcoal);
-  padding:6px 2px;border-bottom:2px solid transparent;transition:border-color .15s,color .15s;
+  padding:6px 2px;position:relative;transition:color .15s ease;
 }
-.nav .links a:hover{color:var(--navy);border-bottom-color:var(--accent)}
+.nav .links a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left center;transition:transform .22s ease;
+}
+.nav .links a:hover{color:var(--navy)}
+.nav .links a:hover::after{transform:scaleX(1)}
 .btn-wa{
   font-size:.9rem;color:#fff;font-weight:700;background:#25D366;
   padding:9px 16px;border-radius:22px;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
 }
-.btn-wa:hover{background:#1eb457}
+.btn-wa{transition:background .15s ease,transform .15s ease,box-shadow .15s ease}
+.btn-wa:hover{background:#1eb457;transform:translateY(-1px);box-shadow:0 6px 16px rgba(37,211,102,.35)}
+.btn-wa:active{transform:translateY(0);box-shadow:none}
 
 /* ======================= HERO (foto + overlay) ======================= */
 .hero{
@@ -98,6 +105,8 @@ img{max-width:100%}
   font-size:.98rem;font-weight:700;padding:13px 26px;border-radius:8px;
   display:inline-flex;align-items:center;gap:8px;border:2px solid transparent;transition:.15s;
 }
+.btn-lg:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.22)}
+.btn-lg:active{transform:translateY(0);box-shadow:0 2px 6px rgba(0,0,0,.20)}
 .btn-solid{background:var(--accent);color:#fff}
 .btn-solid:hover{background:#2a6099}
 .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
@@ -184,8 +193,9 @@ img{max-width:100%}
 .card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(20,41,74,.16)}
 .card .thumb{
   width:100%;aspect-ratio:4/3;object-fit:cover;background:#eaeef5;display:block;
-  border-bottom:1px solid var(--line);
+  border-bottom:1px solid var(--line);transition:transform .45s ease;
 }
+.card:hover .thumb{transform:scale(1.045)}   /* la tarjeta ya recorta con overflow:hidden */
 .card-body{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
 .card h3{margin:0 0 2px;font-size:1.12rem;color:var(--navy)}
 .card .loc{color:var(--muted);font-size:.86rem;margin-bottom:12px}
@@ -198,8 +208,11 @@ img{max-width:100%}
 .actions{display:flex;flex-wrap:wrap;gap:8px}
 .btn{
   font-size:.83rem;font-weight:600;padding:8px 12px;border-radius:9px;border:1px solid var(--navy);
-  cursor:pointer;transition:background .15s,color .15s;white-space:nowrap;
+  cursor:pointer;white-space:nowrap;
+  transition:background .15s ease,color .15s ease,transform .15s ease,box-shadow .15s ease;
 }
+.btn:hover{transform:translateY(-1px);box-shadow:0 4px 10px rgba(20,41,74,.18)}
+.btn:active{transform:translateY(0);box-shadow:none}
 .btn-primary{background:var(--navy);color:#fff}
 .btn-primary:hover{background:var(--navy-2)}
 .btn-outline{background:#fff;color:var(--navy)}
@@ -356,7 +369,36 @@ html[data-theme="dark"] .qr-box img{background:#fff;padding:4px}
 
 
 
+/* ======================= APARICIÓN AL BAJAR =======================
+   La clase .anim la pone el script del <head> solo si el sistema NO pide
+   menos movimiento. Sin JS no se agrega, así que el contenido se ve siempre. */
+html.anim .kpi,
+html.anim .section-head,
+html.anim .svc,
+html.anim .card,
+html.anim .method .shot,
+html.anim .method .text,
+html.anim .profile .photos,
+html.anim .profile .text,
+html.anim .contact-qr{
+  transition:opacity .5s ease,transform .5s ease;
+}
+html.anim .kpi:not(.is-visible),
+html.anim .section-head:not(.is-visible),
+html.anim .svc:not(.is-visible),
+html.anim .card:not(.is-visible),
+html.anim .method .shot:not(.is-visible),
+html.anim .method .text:not(.is-visible),
+html.anim .profile .photos:not(.is-visible),
+html.anim .profile .text:not(.is-visible),
+html.anim .contact-qr:not(.is-visible){
+  opacity:0;transform:translateY(14px);
+}
+
 /* Quien pide menos movimiento en su sistema, no lo recibe */
 @media (prefers-reduced-motion:reduce){
-  .nav,.nav-inner,.nav .logo,.nav .brand .name,.nav .brand .tag{transition:none}
+  .nav,.nav-inner,.nav .logo,.nav .brand .name,.nav .brand .tag,
+  .card,.card .thumb,.btn,.btn-lg,.btn-wa,.nav .links a::after{transition:none}
+  .card:hover,.btn:hover,.btn-lg:hover,.btn-wa:hover{transform:none}
+  .card:hover .thumb{transform:none}
 }

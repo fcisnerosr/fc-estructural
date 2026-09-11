@@ -16,6 +16,12 @@
   var d=s||((window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
   document.documentElement.setAttribute('data-theme',d);
 }catch(e){document.documentElement.setAttribute('data-theme','light');}})();
+/* Habilita las animaciones de aparición, salvo si el sistema pide menos movimiento.
+   Se marca aquí, antes del primer pintado, para que el contenido no parpadee. */
+(function(){try{
+  if(!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches))
+    document.documentElement.classList.add('anim');
+}catch(e){}})();
 </script>
 </head>
 <body>
@@ -324,6 +330,33 @@
 </footer>
 
 <script>
+/* Aparición al bajar: cada elemento se anima una sola vez, al asomar en pantalla. */
+(function(){
+  var raiz=document.documentElement;
+  if(!raiz.classList.contains('anim'))return;
+  var sel='.kpi,.section-head,.svc,.card,.method .shot,.method .text,'+
+          '.profile .photos,.profile .text,.contact-qr';
+  var items=document.querySelectorAll(sel);
+  if(!('IntersectionObserver' in window)){            /* navegador viejo: se muestra y ya */
+    for(var i=0;i<items.length;i++) items[i].classList.add('is-visible');
+    return;
+  }
+  var obs=new IntersectionObserver(function(entradas){
+    entradas.forEach(function(e){
+      if(!e.isIntersecting)return;
+      var el=e.target, padre=el.parentElement, pos=0;
+      if(padre){                                      /* escalonar entre hermanos */
+        var hermanos=Array.prototype.filter.call(padre.children,function(c){return c.matches(sel);});
+        pos=Math.min(hermanos.indexOf(el),4);
+      }
+      el.style.transitionDelay=(pos>0?pos*60:0)+'ms';
+      el.classList.add('is-visible');
+      obs.unobserve(el);                              /* una sola vez */
+    });
+  },{rootMargin:'0px 0px -8% 0px',threshold:0.08});
+  for(var j=0;j<items.length;j++) obs.observe(items[j]);
+})();
+
 /* Barra de navegación: se compacta al bajar y se expande al volver arriba. */
 (function(){
   var nav=document.querySelector('.nav');

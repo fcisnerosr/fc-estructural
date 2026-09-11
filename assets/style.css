@@ -278,11 +278,41 @@ img{max-width:100%}
 .contact-qr span{font-size:.8rem;color:#dbe3f0;max-width:190px}
 
 /* ======================= FOOTER ======================= */
-.site-footer{
-  background:var(--charcoal);color:#c7ccd4;text-align:center;padding:34px 22px;font-size:.86rem;
+.site-footer{background:var(--charcoal);color:#c7ccd4;padding:54px 0 0;font-size:.88rem}
+.footer-grid{
+  display:grid;grid-template-columns:1.5fr 1fr 1.25fr 1fr;gap:38px;padding-bottom:40px;
 }
-.site-footer a{color:#dfe6f1;font-weight:600}
-.site-footer .disc{max-width:680px;margin:12px auto 0;font-size:.76rem;color:#9aa2ad}
+/* --- bloque de marca --- */
+.f-logo{height:56px;width:auto;display:block;background:#fff;padding:7px;border-radius:10px}
+.f-name{margin:15px 0 6px;color:#fff;font-weight:800;font-size:1.06rem}
+.f-tag{margin:0 0 18px;color:#9aa2ad;line-height:1.55;max-width:34ch}
+.f-social{display:flex;gap:10px;margin-bottom:10px}
+.f-social .soc{
+  width:36px;height:36px;border-radius:9px;border:1px solid #454c56;color:#c7ccd4;
+  display:flex;align-items:center;justify-content:center;
+}
+.f-social .soc svg{width:18px;height:18px}
+.f-social .soc.off{opacity:.40;cursor:default}          /* aún no existe: no es clicable */
+.f-social a.soc{transition:background .15s ease,color .15s ease,transform .15s ease}
+.f-social a.soc:hover{background:#3b424c;color:#fff;transform:translateY(-2px)}
+/* --- columnas de enlaces --- */
+.f-col{display:flex;flex-direction:column;align-items:flex-start;gap:11px}
+.f-col h3{
+  margin:0 0 4px;font-size:.74rem;text-transform:uppercase;letter-spacing:1.3px;
+  color:#fff;font-weight:700;
+}
+.f-col a{color:#c7ccd4;transition:color .15s ease}
+.f-col a:hover{color:#fff;text-decoration:underline}
+.f-wa{color:#7fe0a3;font-weight:600}
+.f-item{color:#c7ccd4}
+.f-soon{color:#7b828c;font-style:italic;font-size:.84rem}
+/* --- franja inferior --- */
+.f-bottom{border-top:1px solid #3b4047;padding:22px 22px 32px;text-align:center}
+.f-bottom p{margin:0}
+.f-bottom .disc{margin:10px auto 0;max-width:720px;font-size:.76rem;color:#8b929c}
+
+@media (max-width:900px){ .footer-grid{grid-template-columns:1fr 1fr;gap:34px} }
+@media (max-width:560px){ .footer-grid{grid-template-columns:1fr;gap:30px} }
 
 /* ======================= RESPONSIVE ======================= */
 @media (max-width:860px){

@@ -68,7 +68,13 @@ img{max-width:100%}
   color:#8fb5e6;margin:0 0 14px;
 }
 .hero h1{
-  margin:0 0 16px;font-size:clamp(2.1rem,5vw,3.4rem);font-weight:800;line-height:1.1;max-width:760px;
+  /* sin max-width y con clamp más contenido para que quepa en un solo renglón */
+  margin:0 0 14px;font-size:clamp(1.9rem,4.4vw,3.2rem);font-weight:800;line-height:1.1;
+}
+.hero .hook{
+  margin:0 0 20px;max-width:680px;
+  font-size:clamp(1.05rem,2vw,1.4rem);font-weight:700;color:#fff;line-height:1.35;
+  padding-left:14px;border-left:3px solid #8fc0f0;
 }
 .hero .lead{margin:0 0 28px;max-width:600px;font-size:1.12rem;color:#e2e9f4}
 .hero .cta{display:flex;gap:14px;flex-wrap:wrap}
@@ -117,6 +123,37 @@ img{max-width:100%}
 }
 .svc h3{margin:0 0 8px;font-size:1.12rem;color:var(--navy)}
 .svc p{margin:0;color:var(--muted);font-size:.92rem}
+
+/* --- Dictamen estructural: tarjeta destacada (ocupa toda la fila) --- */
+.svc-feature{
+  grid-column:1 / -1;
+  display:flex;gap:22px;align-items:flex-start;
+  border-color:var(--accent);
+  scroll-margin-top:96px;            /* que la nav fija no la tape al anclar */
+}
+.svc-feature:hover{transform:none;box-shadow:var(--shadow)}
+.svc-feature .ico{flex:0 0 auto;margin-bottom:0}
+.svc-feature .svc-body{flex:1;min-width:0}
+.svc-feature p{max-width:80ch}
+.svc-badge{
+  display:inline-block;vertical-align:middle;margin-left:10px;
+  font-size:.68rem;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+  color:var(--accent);background:rgba(47,111,176,.10);
+  border:1px solid rgba(47,111,176,.35);border-radius:20px;padding:3px 10px;
+}
+.svc-feature .svc-lead{margin-bottom:10px;color:var(--navy);font-weight:700;font-size:1rem}
+.svc-feature .svc-note{margin-top:12px;color:var(--accent);font-weight:600;font-size:.86rem}
+
+/* --- Hero: línea de cobertura del dictamen --- */
+.hero .coverage{
+  display:inline-flex;align-items:baseline;gap:9px;
+  margin:0 0 26px;padding-bottom:3px;
+  color:#fff;font-size:1rem;font-weight:600;
+  border-bottom:1px solid rgba(255,255,255,.45);
+  transition:border-color .15s;
+}
+.hero .coverage span{color:#8fc0f0;font-size:.9em}
+.hero .coverage:hover{border-bottom-color:#fff}
 
 /* ======================= PROYECTOS (tarjetas modelo) ======================= */
 .section-sub{text-align:center;color:var(--muted);margin:-26px auto 34px;font-size:.95rem;max-width:640px}
@@ -221,6 +258,8 @@ img{max-width:100%}
   .method{grid-template-columns:1fr;gap:26px}
 }
 @media (max-width:680px){
+  .svc-feature{flex-direction:column;gap:0}
+  .svc-feature .ico{margin-bottom:16px}
   .nav .links{display:none}
   .nav .logo{height:44px}
   .hero{min-height:66vh}
@@ -260,7 +299,7 @@ html[data-theme="dark"] .nav{background:rgba(15,22,30,.94);border-bottom-color:v
 html[data-theme="dark"] .nav .brand .name{color:#e6ebf2}
 html[data-theme="dark"] .nav .links a{color:#c3cdda}
 html[data-theme="dark"] .nav .links a:hover{color:#fff}
-html[data-theme="dark"] .nav .logo{border-radius:8px}   /* logo de fondo blanco → insignia */
+html[data-theme="dark"] .nav .logo{background:#fff;padding:7px;border-radius:10px}  /* insignia blanca: el trazo es oscuro y sobre fondo oscuro no se leería */
 html[data-theme="dark"] .theme-toggle{color:#e6ebf2;border-color:#3a4b60}
 html[data-theme="dark"] .theme-toggle:hover{background:#1c2634}
 
@@ -273,6 +312,7 @@ html[data-theme="dark"] .section.alt{background:#10171f}
 /* títulos y textos */
 html[data-theme="dark"] .section-head h2,
 html[data-theme="dark"] .card h3,
+html[data-theme="dark"] .svc-feature .svc-lead,
 html[data-theme="dark"] .svc h3,
 html[data-theme="dark"] .profile h2,
 html[data-theme="dark"] .method h2,
@@ -280,6 +320,9 @@ html[data-theme="dark"] .steps li b,
 html[data-theme="dark"] .spec b{color:#e6ebf2}
 html[data-theme="dark"] .profile p,
 html[data-theme="dark"] .profile li{color:#c7d1de}
+
+/* insignia del dictamen */
+html[data-theme="dark"] .svc-badge{background:rgba(90,151,219,.12);border-color:rgba(90,151,219,.40)}
 
 /* botones */
 html[data-theme="dark"] .btn-outline{background:#151d28;color:#cdd8e6;border-color:#3a4b60}

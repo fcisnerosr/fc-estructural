@@ -639,73 +639,105 @@ html.anim .contact-qr:not(.is-visible){
 
 
 /* ===================================================================
-   LIQUID GLASS — solo en la versión móvil (hasta 900 px)
-   La barra sale del flujo y flota sobre el contenido: el material solo
-   se lee como cristal si hay algo pasando por detrás. El alto lo mide
-   un script y lo deja en --nav-h, para que el hero sepa cuánto despejar.
+   LIQUID GLASS — barra, menú y controles
+   La barra sale del flujo y flota sobre el contenido: el material solo se
+   lee como cristal si hay algo pasando por detrás. El alto lo mide un
+   script y lo deja en --nav-h, para que el hero sepa cuánto despejar; se
+   mide en reposo, porque al bajar la barra encoge y el hero no debe
+   moverse por eso.
    =================================================================== */
-@media (max-width:900px){
+.nav{
+  --float-top:12px;      /* separación del borde superior */
+  --float-side:16px;     /* aire a los costados */
+  --nav-radius:26px;
+  --nav-max:1264px;
+  position:fixed;left:0;right:0;
+  top:calc(var(--float-top) + env(safe-area-inset-top,0px));
+  margin:0 auto;padding-top:0;
+  width:calc(100% - var(--float-side)*2);
+  max-width:var(--nav-max);
+  border:0;border-radius:var(--nav-radius);
+  background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,255,255,.55));
+  -webkit-backdrop-filter:blur(30px) saturate(185%);
+          backdrop-filter:blur(30px) saturate(185%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.92),      /* brillo especular del canto superior */
+    inset 0 0 0 1px rgba(255,255,255,.42),    /* borde del cristal */
+    inset 0 -10px 20px rgba(255,255,255,.16), /* rebote de luz en la base */
+    0 12px 34px rgba(20,41,74,.20),
+    0 2px 8px rgba(20,41,74,.10);
+  transition:background .3s ease,box-shadow .3s ease;
+}
+/* Reflejo diagonal: es lo que separa el cristal del simple desenfoque */
+.nav::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(118deg,
+    rgba(255,255,255,.50) 0%,rgba(255,255,255,0) 38%,
+    rgba(255,255,255,0) 64%,rgba(255,255,255,.20) 100%);
+  mix-blend-mode:overlay;
+}
+.nav-inner{position:relative;z-index:1}   /* el contenido va sobre el reflejo */
+.nav.scrolled{
+  background:linear-gradient(180deg,rgba(255,255,255,.80),rgba(255,255,255,.64));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 0 0 1px rgba(255,255,255,.48),
+    inset 0 -10px 20px rgba(255,255,255,.18),
+    0 14px 38px rgba(20,41,74,.26),
+    0 2px 8px rgba(20,41,74,.12);
+}
+/* El hero pasa por debajo; hay que despejarle el alto de la barra */
+.hero{padding-top:calc(var(--nav-h,97px) + 26px)}
+[id]{scroll-margin-top:96px}
 
-  /* ---------- La barra, como una lente flotante ---------- */
-  .nav{
-    position:fixed;left:0;right:0;
-    top:calc(9px + env(safe-area-inset-top,0px));
-    margin:0 10px;padding-top:0;
-    border:0;border-radius:22px;
-    background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,255,255,.55));
-    -webkit-backdrop-filter:blur(30px) saturate(185%);
-            backdrop-filter:blur(30px) saturate(185%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.92),      /* brillo especular del canto superior */
-      inset 0 0 0 1px rgba(255,255,255,.42),    /* borde del cristal */
-      inset 0 -10px 20px rgba(255,255,255,.16), /* rebote de luz en la base */
-      0 12px 34px rgba(20,41,74,.20),
-      0 2px 8px rgba(20,41,74,.10);
-    transition:background .3s ease,box-shadow .3s ease;
-  }
-  /* Reflejo diagonal: es lo que separa el cristal del simple desenfoque */
-  .nav::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-    background:linear-gradient(118deg,
-      rgba(255,255,255,.50) 0%,rgba(255,255,255,0) 38%,
-      rgba(255,255,255,0) 64%,rgba(255,255,255,.20) 100%);
-    mix-blend-mode:overlay;
-  }
-  .nav-inner{position:relative;z-index:1}   /* el contenido va sobre el reflejo */
-  .nav.scrolled{
-    background:linear-gradient(180deg,rgba(255,255,255,.80),rgba(255,255,255,.64));
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.95),
-      inset 0 0 0 1px rgba(255,255,255,.48),
-      inset 0 -10px 20px rgba(255,255,255,.18),
-      0 14px 38px rgba(20,41,74,.26),
-      0 2px 8px rgba(20,41,74,.12);
-  }
-  /* El hero pasa por debajo; hay que despejarle el alto de la barra */
+/* En el teléfono la barra se pega más a los bordes y redondea menos */
+@media (max-width:900px){
+  .nav{--float-top:9px;--float-side:10px;--nav-radius:22px;--nav-max:none}
   .hero{padding-top:calc(var(--nav-h,70px) + 20px)}
   [id]{scroll-margin-top:calc(var(--nav-h,70px) + 26px)}
+}
+@media (max-width:345px){ .nav{--float-side:6px} }
 
-  /* ---------- Botones de la barra, en el mismo material ---------- */
-  .theme-toggle,.nav-burger{
-    border:0;
-    background:linear-gradient(180deg,rgba(255,255,255,.58),rgba(255,255,255,.30));
-    -webkit-backdrop-filter:blur(10px) saturate(165%);
-            backdrop-filter:blur(10px) saturate(165%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.95),
-      inset 0 0 0 1px rgba(255,255,255,.50),
-      0 3px 10px rgba(20,41,74,.14);
-  }
-  .theme-toggle:hover,.nav-burger:hover{background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,255,255,.42))}
-  .btn-wa{
-    background:linear-gradient(180deg,#39e47d,#1fbe5a);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.55),
-      inset 0 0 0 1px rgba(255,255,255,.30),
-      0 5px 16px rgba(37,211,102,.42);
-  }
+/* ---------- Botones de la barra, en el mismo material ---------- */
+.theme-toggle,.nav-burger{
+  border:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.58),rgba(255,255,255,.30));
+  -webkit-backdrop-filter:blur(10px) saturate(165%);
+          backdrop-filter:blur(10px) saturate(165%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 0 0 1px rgba(255,255,255,.50),
+    0 3px 10px rgba(20,41,74,.14);
+}
+.theme-toggle:hover,.nav-burger:hover{background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,255,255,.42))}
+.btn-wa{
+  background:linear-gradient(180deg,#39e47d,#1fbe5a);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.55),
+    inset 0 0 0 1px rgba(255,255,255,.30),
+    0 5px 16px rgba(37,211,102,.42);
+}
+.btn-wa:hover{
+  background:linear-gradient(180deg,#46ec88,#24cd63);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 8px 22px rgba(37,211,102,.50);
+}
 
-  /* ---------- El menú, una lámina de cristal suspendida ---------- */
+/* Enlaces de la barra en escritorio: sobre cristal, el activo va traslúcido */
+@media (min-width:1041px){
+  .nav .links a.active{
+    background:linear-gradient(180deg,rgba(20,41,74,.94),rgba(20,41,74,.86));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 4px 12px rgba(20,41,74,.30);
+  }
+  .nav .links a:hover{background:rgba(255,255,255,.42)}
+  html[data-theme="dark"] .nav .links a.active{
+    background:linear-gradient(180deg,rgba(90,151,219,.95),rgba(70,126,190,.90));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 4px 12px rgba(0,0,0,.35);
+  }
+  html[data-theme="dark"] .nav .links a:hover{background:rgba(255,255,255,.10)}
+}
+
+/* ---------- El menú desplegable, una lámina de cristal suspendida ---------- */
+@media (max-width:1040px){
   .nav .links{
     top:calc(100% + 9px);
     border:0;border-radius:20px;padding:10px;
@@ -723,72 +755,6 @@ html.anim .contact-qr:not(.is-visible){
     background:rgba(20,41,74,.92);
     box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 4px 12px rgba(20,41,74,.35);
   }
-
-  /* ---------- Hero: el cristal luce sobre la foto ---------- */
-  .hero .coverage{
-    border:0;border-radius:14px;
-    background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.10));
-    -webkit-backdrop-filter:blur(14px) saturate(160%);
-            backdrop-filter:blur(14px) saturate(160%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.55),
-      inset 0 0 0 1px rgba(255,255,255,.30),
-      0 6px 20px rgba(0,0,0,.20);
-  }
-  .hero .coverage:hover{background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,.16))}
-  .btn-ghost{
-    border-color:transparent;
-    background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(255,255,255,.11));
-    -webkit-backdrop-filter:blur(14px) saturate(160%);
-            backdrop-filter:blur(14px) saturate(160%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.58),
-      inset 0 0 0 1px rgba(255,255,255,.32),
-      0 6px 18px rgba(0,0,0,.22);
-  }
-  .btn-solid{
-    background:linear-gradient(180deg,#4d8fd0,#2f6fb0);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.42),
-      inset 0 0 0 1px rgba(255,255,255,.18),
-      0 6px 18px rgba(20,41,74,.38);
-  }
-  .contact-actions .btn-solid[style]{
-    background:linear-gradient(180deg,#39e47d,#1fbe5a) !important;   /* el de WhatsApp lleva color propio en línea */
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 6px 18px rgba(37,211,102,.38);
-  }
-
-  /* ---------- Modo oscuro: el mismo material, con luz tenue ---------- */
-  html[data-theme="dark"] .nav{
-    background:linear-gradient(180deg,rgba(34,45,60,.70),rgba(15,22,30,.58));
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.24),
-      inset 0 0 0 1px rgba(255,255,255,.13),
-      inset 0 -10px 20px rgba(255,255,255,.05),
-      0 14px 38px rgba(0,0,0,.55);
-  }
-  html[data-theme="dark"] .nav.scrolled{
-    background:linear-gradient(180deg,rgba(34,45,60,.80),rgba(15,22,30,.68));
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.26),
-      inset 0 0 0 1px rgba(255,255,255,.15),
-      0 16px 42px rgba(0,0,0,.62);
-  }
-  html[data-theme="dark"] .nav::before{
-    background:linear-gradient(118deg,
-      rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 38%,
-      rgba(255,255,255,0) 64%,rgba(255,255,255,.10) 100%);
-  }
-  html[data-theme="dark"] .theme-toggle,
-  html[data-theme="dark"] .nav-burger{
-    background:linear-gradient(180deg,rgba(255,255,255,.17),rgba(255,255,255,.07));
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.30),
-      inset 0 0 0 1px rgba(255,255,255,.15),
-      0 3px 10px rgba(0,0,0,.42);
-  }
-  html[data-theme="dark"] .theme-toggle:hover,
-  html[data-theme="dark"] .nav-burger:hover{background:linear-gradient(180deg,rgba(255,255,255,.26),rgba(255,255,255,.12))}
   html[data-theme="dark"] .nav .links{
     background:linear-gradient(180deg,rgba(34,45,60,.95),rgba(15,22,30,.91));
     box-shadow:
@@ -803,25 +769,84 @@ html.anim .contact-qr:not(.is-visible){
   }
 }
 
+/* ---------- Hero: el cristal luce sobre la foto ---------- */
+.hero .coverage{
+  border:0;border-radius:14px;padding:11px 15px;
+  background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.10));
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
+          backdrop-filter:blur(14px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.55),
+    inset 0 0 0 1px rgba(255,255,255,.30),
+    0 6px 20px rgba(0,0,0,.20);
+}
+.hero .coverage:hover{background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,.16))}
+.btn-ghost{
+  border-color:transparent;
+  background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(255,255,255,.11));
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
+          backdrop-filter:blur(14px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.58),
+    inset 0 0 0 1px rgba(255,255,255,.32),
+    0 6px 18px rgba(0,0,0,.22);
+}
+.btn-ghost:hover{background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.18));border-color:transparent}
+.btn-solid{
+  background:linear-gradient(180deg,#4d8fd0,#2f6fb0);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.42),
+    inset 0 0 0 1px rgba(255,255,255,.18),
+    0 6px 18px rgba(20,41,74,.38);
+}
+.btn-solid:hover{background:linear-gradient(180deg,#5c9edd,#356fae)}
+.contact-actions .btn-solid[style]{
+  background:linear-gradient(180deg,#39e47d,#1fbe5a) !important;   /* el de WhatsApp lleva color propio en línea */
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 6px 18px rgba(37,211,102,.38);
+}
+
+/* ---------- Modo oscuro: el mismo material, con luz tenue ---------- */
+html[data-theme="dark"] .nav{
+  background:linear-gradient(180deg,rgba(34,45,60,.70),rgba(15,22,30,.58));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.24),
+    inset 0 0 0 1px rgba(255,255,255,.13),
+    inset 0 -10px 20px rgba(255,255,255,.05),
+    0 14px 38px rgba(0,0,0,.55);
+}
+html[data-theme="dark"] .nav.scrolled{
+  background:linear-gradient(180deg,rgba(34,45,60,.80),rgba(15,22,30,.68));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.26),
+    inset 0 0 0 1px rgba(255,255,255,.15),
+    0 16px 42px rgba(0,0,0,.62);
+}
+html[data-theme="dark"] .nav::before{
+  background:linear-gradient(118deg,
+    rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 38%,
+    rgba(255,255,255,0) 64%,rgba(255,255,255,.10) 100%);
+}
+html[data-theme="dark"] .theme-toggle,
+html[data-theme="dark"] .nav-burger{
+  background:linear-gradient(180deg,rgba(255,255,255,.17),rgba(255,255,255,.07));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.30),
+    inset 0 0 0 1px rgba(255,255,255,.15),
+    0 3px 10px rgba(0,0,0,.42);
+}
+html[data-theme="dark"] .theme-toggle:hover,
+html[data-theme="dark"] .nav-burger:hover{background:linear-gradient(180deg,rgba(255,255,255,.26),rgba(255,255,255,.12))}
+
 /* Sin backdrop-filter no hay cristal: se vuelve a un fondo sólido legible */
 @supports not ((backdrop-filter:blur(4px)) or (-webkit-backdrop-filter:blur(4px))){
-  @media (max-width:900px){
-    .nav{background:rgba(255,255,255,.97)}
-    .nav.scrolled{background:rgba(255,255,255,.98)}
-    .nav .links{background:var(--white)}
-    html[data-theme="dark"] .nav,
-    html[data-theme="dark"] .nav.scrolled{background:rgba(15,22,30,.97)}
-    html[data-theme="dark"] .nav .links{background:#0f161e}
-    .hero .coverage,.btn-ghost{background:rgba(255,255,255,.16)}
-  }
+  .nav{background:rgba(255,255,255,.97)}
+  .nav.scrolled{background:rgba(255,255,255,.98)}
+  .nav .links{background:var(--white)}
+  html[data-theme="dark"] .nav,
+  html[data-theme="dark"] .nav.scrolled{background:rgba(15,22,30,.97)}
+  html[data-theme="dark"] .nav .links{background:#0f161e}
+  .hero .coverage,.btn-ghost{background:rgba(255,255,255,.16)}
 }
-
-/* La barra flotante se lleva 20 px en márgenes: en 320 px hay que devolverlos */
-@media (max-width:345px){
-  .nav{margin:0 6px;--nav-px:12px}
-  .nav-tools{gap:5px}
-}
-
 
 /* ===================================================================
    MATERIAL DE CRISTAL EN TARJETAS, ICONOS Y PASOS  (móvil y escritorio)

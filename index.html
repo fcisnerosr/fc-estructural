@@ -19,7 +19,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="f'c estructural — revisa el modelo estructural desde tu navegador, sin ETABS ni SAP2000">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="assets/style.css?v=11">
+<link rel="stylesheet" href="assets/style.css?v=12">
 <script>
 /* Fija el tema antes de pintar: preferencia guardada, o la del sistema. */
 (function(){try{
@@ -439,6 +439,7 @@
   var nav=document.querySelector('.nav');
   if(!nav)return;
   function medir(){
+    if(nav.classList.contains('scrolled'))return;   /* encogida no sirve de referencia */
     document.documentElement.style.setProperty('--nav-h',Math.round(nav.offsetHeight)+'px');
   }
   medir();

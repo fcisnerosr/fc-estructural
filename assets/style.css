@@ -821,3 +821,128 @@ html.anim .contact-qr:not(.is-visible){
   .nav{margin:0 6px;--nav-px:12px}
   .nav-tools{gap:5px}
 }
+
+
+/* ===================================================================
+   MATERIAL DE CRISTAL EN TARJETAS, ICONOS Y PASOS  (móvil y escritorio)
+   Estos elementos van sobre fondos planos, así que el desenfoque solo
+   no se nota: lo que da el material es el canto iluminado, el aro, el
+   relleno en degradado y el reflejo diagonal. Para que el desenfoque
+   tenga algo que hacer, las secciones llevan un tinte muy tenue detrás.
+   =================================================================== */
+:root{
+  --glass-top:rgba(255,255,255,.95);      /* brillo especular del canto superior */
+  /* El aro no puede ser blanco: sobre fondo claro no se vería. Lleva el tinte
+     del azul de marca, que es lo que dibuja el canto del cristal. */
+  --glass-edge:rgba(20,41,74,.12);
+  --glass-fill:linear-gradient(162deg,rgba(255,255,255,.88),rgba(255,255,255,.68));
+  --glass-soft:linear-gradient(160deg,rgba(20,41,74,.055),rgba(20,41,74,.018));
+  --glass-lift:0 10px 30px rgba(20,41,74,.12),0 2px 6px rgba(20,41,74,.06);
+  --glass-lift-hi:0 18px 44px rgba(20,41,74,.20),0 3px 10px rgba(20,41,74,.10);
+  --glass-sheen:linear-gradient(118deg,
+      rgba(255,255,255,.45) 0%,rgba(255,255,255,0) 40%,
+      rgba(255,255,255,0) 66%,rgba(255,255,255,.18) 100%);
+  --glass-deep:linear-gradient(158deg,rgba(79,140,203,.96),rgba(20,41,74,.94));
+  --tint-a:rgba(47,111,176,.08);
+  --tint-b:rgba(47,111,176,.06);
+}
+html[data-theme="dark"]{
+  --glass-top:rgba(255,255,255,.20);
+  --glass-edge:rgba(255,255,255,.13);
+  --glass-fill:linear-gradient(162deg,rgba(46,61,81,.80),rgba(20,29,40,.66));
+  --glass-soft:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.03));
+  --glass-lift:0 12px 32px rgba(0,0,0,.44),0 2px 8px rgba(0,0,0,.30);
+  --glass-lift-hi:0 20px 48px rgba(0,0,0,.58),0 3px 10px rgba(0,0,0,.36);
+  --glass-sheen:linear-gradient(118deg,
+      rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 40%,
+      rgba(255,255,255,0) 66%,rgba(255,255,255,.07) 100%);
+  --glass-deep:linear-gradient(158deg,rgba(90,151,219,.85),rgba(16,32,56,.92));
+  --tint-a:rgba(90,151,219,.10);
+  --tint-b:rgba(90,151,219,.07);
+}
+
+/* Tinte de fondo: le da al cristal algo que refractar sin cambiar el color */
+.section{position:relative;isolation:isolate}
+.section::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(680px 420px at 12% 0%,var(--tint-a),transparent 62%),
+    radial-gradient(560px 380px at 92% 80%,var(--tint-b),transparent 62%);
+}
+
+/* ---------- Tarjetas de servicio y de proyecto ---------- */
+.svc,.card{
+  position:relative;border:0;
+  background:var(--glass-fill);
+  /* Blur moderado: detrás de la tarjeta solo hay un degradado, así que el
+     desenfoque aporta poco y sí cuesta al desplazar en el móvil. */
+  -webkit-backdrop-filter:blur(10px) saturate(160%);
+          backdrop-filter:blur(10px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 var(--glass-top),
+    inset 0 0 0 1px var(--glass-edge),
+    var(--glass-lift);
+}
+.svc:hover,.card:hover{
+  box-shadow:
+    inset 0 1px 0 var(--glass-top),
+    inset 0 0 0 1px var(--glass-edge),
+    var(--glass-lift-hi);
+}
+.svc-feature{box-shadow:
+  inset 0 1px 0 var(--glass-top),
+  inset 0 0 0 1px rgba(47,111,176,.45),
+  var(--glass-lift)}
+.svc-feature:hover{box-shadow:
+  inset 0 1px 0 var(--glass-top),
+  inset 0 0 0 1px rgba(47,111,176,.45),
+  var(--glass-lift)}
+/* El reflejo va sobre la tarjeta de servicio entera; en la de proyecto solo
+   sobre los datos, para no aclarar la foto del modelo. */
+.svc::before,.card-body::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:var(--glass-sheen);mix-blend-mode:overlay;
+}
+.svc>*,.card-body>*{position:relative}
+.card-body{position:relative}
+.card .thumb{border-bottom:1px solid var(--glass-edge)}
+
+/* ---------- Iconos y números: cristal teñido de azul ---------- */
+.svc .ico,.steps li::before{
+  background:var(--glass-deep);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.50),
+    inset 0 0 0 1px rgba(255,255,255,.24),
+    0 6px 16px rgba(20,41,74,.30);
+}
+
+/* ---------- Ficha de datos del modelo: lámina interior ---------- */
+.specs{
+  background:var(--glass-soft);
+  border-radius:12px;padding:13px 14px;
+  box-shadow:inset 0 0 0 1px var(--glass-edge);
+}
+
+/* ---------- Botones de la tarjeta ---------- */
+.btn-primary{
+  background:linear-gradient(170deg,#24558c,#14294a);border-color:transparent;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.32),
+    inset 0 0 0 1px rgba(255,255,255,.14),
+    0 5px 14px rgba(20,41,74,.30);
+}
+.btn-primary:hover{background:linear-gradient(170deg,#2d6aad,#1b3a63)}
+.btn-outline{
+  background:var(--glass-soft);border-color:transparent;
+  -webkit-backdrop-filter:blur(10px) saturate(150%);
+          backdrop-filter:blur(10px) saturate(150%);
+  box-shadow:
+    inset 0 1px 0 var(--glass-top),
+    inset 0 0 0 1px var(--glass-edge),
+    0 3px 10px rgba(20,41,74,.12);
+}
+.btn-outline:hover{background:var(--glass-fill)}
+.qr-box img{
+  border:0;background:#fff;padding:5px;
+  box-shadow:inset 0 0 0 1px var(--glass-edge),0 4px 12px rgba(20,41,74,.16);
+}

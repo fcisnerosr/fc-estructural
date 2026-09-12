@@ -272,11 +272,11 @@ img{max-width:100%}
 .qr-box span{font-size:.62rem;color:var(--muted);display:block;margin-top:3px;max-width:78px}
 
 /* ======================= PERFIL ======================= */
-.profile{display:grid;grid-template-columns:0.9fr 1.1fr;gap:44px;align-items:center}
+.profile{display:grid;grid-template-columns:0.78fr 1.22fr;gap:48px;align-items:center}
 .profile .photos{position:relative}
 .profile .photos .main{
   width:100%;border-radius:var(--radius);box-shadow:var(--shadow);display:block;
-  aspect-ratio:4/5;object-fit:cover;object-position:center top;
+  aspect-ratio:4/4.5;object-fit:cover;object-position:center top;
 }
 .profile .photos .mini{
   position:absolute;right:-14px;bottom:-18px;width:42%;
@@ -286,9 +286,12 @@ img{max-width:100%}
 .profile h2{margin:0 0 6px;font-size:1.7rem;color:var(--navy);font-weight:800}
 .profile .role{color:var(--accent);font-weight:700;font-size:.98rem;margin:0 0 16px}
 .profile p{margin:0 0 14px;color:#3a4048;font-size:1rem}
-.profile ul{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.profile ul{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:17px}
 .profile li{position:relative;padding-left:26px;color:#3a4048;font-size:.96rem}
 .profile li::before{content:"▸";position:absolute;left:2px;color:var(--accent);font-weight:800}
+/* Cada punto abre con su concepto: es lo que hace legible una lista larga */
+.profile li b{color:var(--navy);font-weight:700}
+html[data-theme="dark"] .profile li b{color:#e6ebf2}
 
 /* ======================= MÉTODO ======================= */
 .method{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}

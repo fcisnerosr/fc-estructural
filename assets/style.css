@@ -20,6 +20,7 @@ body{
   color:var(--ink);
   background:var(--white);
   line-height:1.55;
+  -webkit-text-size-adjust:100%;text-size-adjust:100%;
 }
 a{color:inherit;text-decoration:none}
 /* Enlaces dentro de texto: tienen que verse como enlaces */
@@ -31,12 +32,17 @@ a{color:inherit;text-decoration:none}
 .link:hover{color:var(--navy);text-decoration-thickness:2.5px}
 img{max-width:100%}
 .wrap{max-width:1200px;margin:0 auto;padding:0 22px}
+/* La barra es fija: al saltar a una sección hay que dejarle su altura libre. */
+[id]{scroll-margin-top:92px}
+/* Foco visible con teclado, sin el halo permanente del clic */
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 
 /* ======================= NAV (fija, blanca) ======================= */
 .nav{
   position:sticky;top:0;z-index:40;
-  background:rgba(255,255,255,.96);backdrop-filter:blur(6px);
+  background:rgba(255,255,255,.985);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
+  padding-top:env(safe-area-inset-top,0px);
   transition:box-shadow .28s ease;
 }
 /* Arriba: la marca se presenta, sin descriptor (el h1 ya lo dice).
@@ -50,9 +56,10 @@ img{max-width:100%}
 .nav.scrolled .nav-inner{padding:7px 22px}
 .nav .logo{height:66px;width:auto;display:block;transition:height .28s ease}
 .nav.scrolled .logo{height:40px}
-.nav .brand{display:flex;flex-direction:column;line-height:1.05}
+.nav .brand{display:flex;flex-direction:column;line-height:1.05;min-width:0}
 .nav .brand .name{
   font-weight:800;color:var(--navy);font-size:1.5rem;letter-spacing:.2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
   transition:font-size .28s ease;
 }
 .nav.scrolled .brand .name{font-size:1.12rem}
@@ -82,10 +89,28 @@ img{max-width:100%}
 /* Sección en la que está el visitante */
 .nav .links a.active{background:var(--navy);color:#fff}
 .nav .links a.active::after{transform:scaleX(0)}
+/* Bloque de la derecha: tema, WhatsApp y (en móvil) el botón de menú. */
+.nav-tools{display:flex;align-items:center;gap:8px;flex:0 0 auto}
 .btn-wa{
   font-size:.9rem;color:#fff;font-weight:700;background:#25D366;
   padding:9px 16px;border-radius:22px;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+  flex:0 0 auto;
 }
+.btn-wa .wa-ico{width:17px;height:17px;flex:0 0 auto}
+/* Botón de menú (hamburguesa): solo aparece cuando los enlaces no caben. */
+.nav-burger{
+  display:none;width:40px;height:40px;padding:0;flex:0 0 auto;
+  background:transparent;border:1px solid var(--line);border-radius:11px;cursor:pointer;
+  flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  transition:background .15s ease,border-color .15s ease;
+}
+.nav-burger span{
+  display:block;width:17px;height:2px;border-radius:2px;background:var(--charcoal);
+  transition:transform .22s ease,opacity .18s ease;
+}
+.nav-burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 .btn-wa{transition:background .15s ease,transform .15s ease,box-shadow .15s ease}
 .btn-wa:hover{background:#1eb457;transform:translateY(-1px);box-shadow:0 6px 16px rgba(37,211,102,.35)}
 .btn-wa:active{transform:translateY(0);box-shadow:none}
@@ -100,6 +125,8 @@ img{max-width:100%}
     linear-gradient(105deg,rgba(20,41,74,.90) 0%,rgba(20,41,74,.66) 46%,rgba(43,47,54,.45) 100%),
     url("img/edificio_concreto.webp") center/cover no-repeat;
 }
+/* svh = alto estable: no salta cuando el navegador esconde su barra */
+@supports (min-height:100svh){ .hero{min-height:78svh} }
 .hero-content{max-width:1200px;margin:0 auto;padding:70px 22px;width:100%}
 .hero .eyebrow{
   text-transform:uppercase;letter-spacing:2.5px;font-size:.8rem;font-weight:700;
@@ -150,7 +177,9 @@ img{max-width:100%}
 
 /* ======================= SERVICIOS ======================= */
 .services{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;
+  display:grid;gap:22px;
+  /* min() para que el mínimo ceda en pantallas más angostas que él */
+  grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));
 }
 .svc{
   background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
@@ -198,7 +227,8 @@ img{max-width:100%}
 /* ======================= PROYECTOS (tarjetas modelo) ======================= */
 .section-sub{text-align:center;color:var(--muted);margin:-26px auto 34px;font-size:.95rem;max-width:640px}
 .models{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;
+  display:grid;gap:24px;
+  grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));
 }
 .card{
   background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
@@ -351,7 +381,6 @@ img{max-width:100%}
 @media (max-width:680px){
   .svc-feature{flex-direction:column;gap:0}
   .svc-feature .ico{margin-bottom:16px}
-  .nav .links{display:none}
   .nav .logo{height:50px}
   .nav.scrolled .logo{height:34px}
   .nav .brand .name{font-size:1.22rem}
@@ -399,6 +428,9 @@ html[data-theme="dark"] .nav .links a.active{background:var(--accent);color:#0d1
 html[data-theme="dark"] .nav .logo{background:#fff;padding:7px;border-radius:10px}  /* insignia blanca: el trazo es oscuro y sobre fondo oscuro no se leería */
 html[data-theme="dark"] .theme-toggle{color:#e6ebf2;border-color:#3a4b60}
 html[data-theme="dark"] .theme-toggle:hover{background:#1c2634}
+html[data-theme="dark"] .nav-burger{border-color:#3a4b60}
+html[data-theme="dark"] .nav-burger span{background:#e6ebf2}   /* sobre barra oscura el gris carbón no se vería */
+html[data-theme="dark"] .nav-burger:hover{background:#1c2634}
 
 /* superficies claras → oscuras */
 html[data-theme="dark"] .card,
@@ -464,4 +496,146 @@ html.anim .contact-qr:not(.is-visible){
   .card,.card .thumb,.btn,.btn-lg,.btn-wa,.nav .links a::after{transition:none}
   .card:hover,.btn:hover,.btn-lg:hover,.btn-wa:hover{transform:none}
   .card:hover .thumb{transform:none}
+}
+
+
+/* ===================================================================
+   MÓVIL Y TABLET — legibilidad y respiración
+   Las reglas van al final a propósito: ajustan espaciado y tamaños,
+   no colores, así que conviven con el modo oscuro de arriba.
+   =================================================================== */
+
+/* ---------- Menú desplegable (cuando los enlaces ya no caben) ---------- */
+@media (max-width:900px){
+  .nav-burger{display:flex}
+  .nav .links{
+    display:none;                       /* .open lo muestra */
+    position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;align-items:stretch;gap:2px;
+    padding:10px 16px 16px;
+    background:var(--white);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 16px 28px rgba(20,41,74,.16);
+  }
+  .nav .links.open{display:flex}
+  .nav .links a{padding:13px 14px;font-size:1rem;border-radius:10px}
+  .nav .links a::after{display:none}    /* el subrayado es un gesto de escritorio */
+  .nav .links a:hover{background:var(--paper)}
+  html[data-theme="dark"] .nav .links{
+    background:#0f161e;box-shadow:0 16px 28px rgba(0,0,0,.55);
+  }
+  html[data-theme="dark"] .nav .links a:hover{background:#1c2634}
+}
+
+/* ---------- Barra: en pantallas angostas WhatsApp queda como ícono ---------- */
+@media (max-width:620px){
+  .nav-tools{gap:7px}
+  .btn-wa{width:40px;height:40px;padding:0;border-radius:50%;justify-content:center;gap:0}
+  .btn-wa .btn-wa-txt{display:none}     /* el ícono ya dice qué es; el texto se cortaba */
+  .btn-wa .wa-ico{width:19px;height:19px}
+  .theme-toggle{width:40px;height:40px;font-size:1rem}
+  .nav-inner{gap:10px}
+}
+
+@media (max-width:680px){
+  [id]{scroll-margin-top:78px}
+  .wrap{padding:0 18px}
+
+  /* ---------- Hero: menos apretado, renglones más cortos ---------- */
+  .hero{min-height:0}
+  @supports (min-height:100svh){ .hero{min-height:62svh} }
+  .hero-content{padding:48px 18px 54px}
+  .hero .eyebrow{font-size:.72rem;letter-spacing:1.6px;margin-bottom:12px}
+  .hero h1{font-size:clamp(1.7rem,7.6vw,2.3rem);line-height:1.18;margin-bottom:16px}
+  .hero .hook{
+    font-size:1.02rem;line-height:1.45;padding-left:13px;margin-bottom:22px;
+  }
+  .hero .lead{font-size:.99rem;line-height:1.68;color:#dde6f3;margin-bottom:24px}
+  .brk{display:none}                    /* el salto forzado sobra en pantalla angosta */
+  /* El subrayado se estiraba de borde a borde al partirse en dos renglones:
+     en móvil funciona mejor como recuadro. */
+  .hero .coverage{
+    display:flex;align-items:flex-start;border-bottom:0;
+    background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.30);
+    border-radius:11px;padding:11px 14px;
+    font-size:.93rem;line-height:1.45;margin-bottom:26px;
+  }
+  .hero .coverage:hover{border-color:rgba(255,255,255,.55)}
+  .hero .cta{gap:10px}
+  .hero .cta .btn-lg{flex:1 1 46%;justify-content:center;padding:14px 18px}
+
+  /* ---------- Franja de cifras: una por renglón, con separador ---------- */
+  .kpis .wrap{display:grid;grid-template-columns:1fr;gap:0;padding:8px 18px 14px}
+  .kpis .kpi{padding:14px 0;border-top:1px solid rgba(255,255,255,.13)}
+  .kpis .kpi:first-child{border-top:0}
+  .kpis .kpi b{font-size:1.28rem}
+  .kpis .kpi span{font-size:.7rem}
+
+  /* ---------- Secciones: más aire entre bloques ---------- */
+  .section{padding:48px 0}
+  .section-head{margin-bottom:28px}
+  .section-head h2,.profile h2,.method h2,.contact-band h2{font-size:1.45rem}
+  .section-head p{font-size:.96rem;line-height:1.62}
+  .section-sub{margin:-16px auto 26px;font-size:.94rem;line-height:1.62}
+
+  /* ---------- Tarjetas de servicio ---------- */
+  .services{gap:16px}
+  .svc{padding:22px 18px}
+  .svc .ico{width:46px;height:46px;font-size:1.3rem;margin-bottom:13px}
+  .svc h3{font-size:1.06rem;line-height:1.32}
+  .svc p{font-size:.95rem;line-height:1.66}
+  .svc-badge{margin-left:0;margin-top:6px;display:inline-block}
+  .svc-feature .svc-lead{font-size:.98rem;line-height:1.5}
+
+  /* ---------- Proyectos ---------- */
+  .models{gap:18px}
+  .card-body{padding:16px 16px 18px}
+  .card h3{font-size:1.06rem;line-height:1.32}
+  .specs{gap:10px 14px;margin-bottom:16px}
+  .spec b{font-size:.92rem}
+  .card-foot{gap:14px}
+  .btn{padding:10px 14px;font-size:.85rem}   /* objetivo táctil cómodo */
+  .qr-box img{width:70px;height:70px}
+  .qr-box span{max-width:70px;font-size:.6rem}
+
+  /* ---------- Perfil y método ---------- */
+  .profile{gap:44px}
+  .profile p{font-size:.99rem;line-height:1.68;margin-bottom:16px}
+  .profile li{font-size:.96rem;line-height:1.6}
+  .profile ul{gap:13px}
+  .method .role,.profile .role{font-size:.94rem}
+  .steps{gap:18px}
+  .steps li{padding-left:48px}
+  .steps li span{font-size:.94rem;line-height:1.62}
+
+  /* ---------- Contacto ---------- */
+  .contact-band .wrap{padding:44px 18px}
+  .contact-band p{font-size:.99rem;line-height:1.66}
+  .contact-actions{gap:10px;width:100%}
+  .contact-actions .btn-lg{flex:1 1 100%;justify-content:center}
+  .contact-qr img{width:150px;height:150px}
+
+  /* ---------- Pie ---------- */
+  .site-footer{padding-top:40px}
+  .footer-grid{padding-bottom:32px}
+  .f-bottom{padding:20px 18px calc(28px + env(safe-area-inset-bottom,0px))}
+  .f-bottom .disc{font-size:.74rem;line-height:1.6}
+}
+
+/* Pantallas muy angostas: los botones del hero pasan a renglón completo */
+/* Pantallas muy angostas: la barra se aprieta para que el nombre no se corte */
+@media (max-width:400px){
+  .nav-inner{padding:10px 14px;gap:8px}
+  .nav.scrolled .nav-inner{padding:6px 14px}
+  .nav .logo{height:40px}
+  .nav .brand .name{font-size:1rem}
+  .nav.scrolled .brand .name{font-size:.94rem}
+  .nav-tools{gap:6px}
+  .theme-toggle,.nav-burger,.btn-wa{width:38px;height:38px}
+}
+/* Pantallas de 320 px (iPhone SE antiguo): un punto más de holgura */
+@media (max-width:345px){
+  .nav .logo{height:36px}
+  .nav .brand .name{font-size:.88rem}
+  .nav.scrolled .brand .name{font-size:.85rem}
 }

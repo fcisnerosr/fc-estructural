@@ -19,7 +19,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="f'c estructural — revisa el modelo estructural desde tu navegador, sin ETABS ni SAP2000">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="assets/style.css?v=9">
+<link rel="stylesheet" href="assets/style.css?v=10">
 <script>
 /* Fija el tema antes de pintar: preferencia guardada, o la del sistema. */
 (function(){try{
@@ -430,6 +430,21 @@
     });
   },{rootMargin:'0px 0px -8% 0px',threshold:0.08});
   for(var j=0;j<items.length;j++) obs.observe(items[j]);
+})();
+
+/* En móvil la barra flota fuera del flujo: el hero necesita saber cuánto mide
+   para no quedar debajo. Se mide en vez de fijarla a mano, porque el alto
+   cambia con el tamaño del logo en cada corte. */
+(function(){
+  var nav=document.querySelector('.nav');
+  if(!nav)return;
+  function medir(){
+    document.documentElement.style.setProperty('--nav-h',Math.round(nav.offsetHeight)+'px');
+  }
+  medir();
+  window.addEventListener('resize',medir,{passive:true});
+  window.addEventListener('load',medir);          /* el logo puede llegar tarde */
+  if(window.ResizeObserver) new ResizeObserver(medir).observe(nav);
 })();
 
 /* Menú móvil: se abre con el botón de la barra y se cierra solo al elegir. */

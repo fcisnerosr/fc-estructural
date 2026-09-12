@@ -60,6 +60,13 @@ img{max-width:100%}
 @media (min-width:901px){
   .nav.scrolled{--nav-py:7px;--logo-h:40px;--brand-size:1.12rem}
 }
+/* Con los seis enlaces en línea, el descriptor va justo de sitio: unos pocos
+   píxeles aquí deciden si cabe entero o no llega a mostrarse. */
+@media (min-width:1041px){
+  .nav-inner{gap:12px}
+  .nav .links a{padding:7px 10px}
+  .nav .links a::after{left:10px;right:10px}
+}
 .nav .brand{display:flex;flex-direction:column;line-height:1.05;min-width:0}
 .nav .brand .name{
   font-weight:800;color:var(--navy);font-size:var(--brand-size);letter-spacing:.2px;
@@ -71,7 +78,10 @@ img{max-width:100%}
   max-height:0;opacity:0;overflow:hidden;
   transition:max-height .28s ease,opacity .22s ease;
 }
-.nav.scrolled .brand .tag{max-height:1.6em;opacity:1;margin-top:3px}
+/* El descriptor aparece solo si de verdad cabe: la clase la pone un script
+   que lo mide, porque su ancho depende de la tipografía del sistema y con
+   una más ancha que Segoe UI se quedaba cortado a media palabra. */
+.nav.scrolled.tag-cabe .brand .tag{max-height:1.6em;opacity:1;margin-top:3px}
 /* Por debajo de 1100 px la barra va apretada: el descriptor es lo primero que sobra */
 @media (max-width:1100px){
   .nav{--brand-size:1.25rem}          /* caben los seis enlaces, no el nombre entero */

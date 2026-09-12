@@ -19,7 +19,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="f'c estructural — revisa el modelo estructural desde tu navegador, sin ETABS ni SAP2000">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="assets/style.css?v=15">
+<link rel="stylesheet" href="assets/style.css?v=16">
 <script>
 /* Fija el tema antes de pintar: preferencia guardada, o la del sistema. */
 (function(){try{
@@ -505,18 +505,32 @@
   marcar();
 })();
 
-/* Barra de navegación: se compacta al bajar y se expande al volver arriba. */
+/* Barra de navegación: se compacta al bajar y se expande al volver arriba.
+   El descriptor solo se muestra si cabe entero. No se puede decidir con un
+   ancho fijo: su medida depende de la tipografía que resuelva el sistema, y
+   con una más ancha que Segoe UI se cortaba a media palabra. Así que se
+   enseña, se mide y se retira si quedó recortado. */
 (function(){
   var nav=document.querySelector('.nav');
   if(!nav)return;
+  var tag=nav.querySelector('.brand .tag');
   var pedido=false;
+  function ajustarTag(){
+    if(!tag)return;
+    nav.classList.add('tag-cabe');
+    if(tag.scrollWidth>tag.clientWidth+1) nav.classList.remove('tag-cabe');
+  }
   function aplicar(){
     nav.classList.toggle('scrolled', window.scrollY>60);
+    ajustarTag();
     pedido=false;
   }
   window.addEventListener('scroll',function(){
     if(!pedido){pedido=true;requestAnimationFrame(aplicar);}
   },{passive:true});
+  window.addEventListener('resize',aplicar,{passive:true});
+  /* las medidas solo son fiables con la tipografía definitiva ya cargada */
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(aplicar);
   aplicar();   /* por si la página se abre ya desplazada */
 })();
 

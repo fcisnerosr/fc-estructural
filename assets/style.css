@@ -972,6 +972,11 @@ html[data-theme="dark"]{
   --lift-hi:0 10px 24px rgba(20,41,74,.45);
   color:#fff;
 }
+.hero .coverage{
+  /* Geometría propia: sin esto hereda la del subrayado original, que no
+     tiene redondeo ni aire lateral y deja la última letra contra el canto. */
+  border-radius:18px;padding:12px 20px;border-bottom:0;
+}
 .btn-ghost,.hero .coverage{
   --body:linear-gradient(180deg,rgba(255,255,255,.24),rgba(255,255,255,.09));
   --ring-hi:rgba(255,255,255,.92);

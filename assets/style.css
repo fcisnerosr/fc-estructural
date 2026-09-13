@@ -264,6 +264,11 @@ img{max-width:100%}
 .spec{display:flex;flex-direction:column}
 .spec label{font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
 .spec b{font-size:.95rem;color:var(--ink);font-weight:600}
+/* Autoría cuando el cálculo no es nuestro: quién calculó y quién modeló */
+.credit{margin:0 0 14px;font-size:.8rem;line-height:1.45;color:var(--muted)}
+.credit span{display:block}
+.credit b{color:var(--ink);font-weight:600}
+.credit em{font-style:normal;white-space:nowrap}   /* el nombre no se parte */
 .card-foot{margin-top:auto;display:flex;gap:12px;align-items:flex-end;justify-content:space-between}
 .actions{display:flex;flex-wrap:wrap;gap:8px}
 .btn{

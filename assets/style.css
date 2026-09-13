@@ -385,6 +385,12 @@ html[data-theme="dark"] .profile li b{color:#e6ebf2}
 .f-wa{color:#7fe0a3;font-weight:600}
 .f-item{color:#c7ccd4}
 .f-soon{color:#7b828c;font-style:italic;font-size:.84rem}
+/* firma a mano: baja al fondo de la columna y se inclina como trazada sobre la hoja;
+   el ancho deja holgura para que el giro no la saque de la columna */
+.f-firma{
+  width:190px;max-width:calc(100% - 12px);height:auto;margin-top:auto;padding-top:18px;
+  transform:rotate(-7deg);transform-origin:left top;
+}
 /* --- franja inferior --- */
 .f-bottom{border-top:1px solid #3b4047;padding:22px 22px 32px;text-align:center}
 .f-bottom p{margin:0}

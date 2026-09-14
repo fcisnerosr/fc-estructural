@@ -1,4 +1,19 @@
 /* ===== f'c estructural — portafolio / landing ===== */
+
+/* Tipografía estilo Apple. En Mac y iPhone se usa la del sistema (San Francisco),
+   que no se puede alojar aquí por licencia; en Windows, Android y Linux entra
+   Inter, libre (SIL OFL) y de trazo casi idéntico. Solo el subconjunto latino:
+   acentos, ñ, ¿¡ y rayas. El navegador lo descarga únicamente si lo necesita. */
+@font-face{
+  font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;
+  src:url("fonts/inter-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:"Inter";font-style:italic;font-weight:100 900;font-display:swap;
+  src:url("fonts/inter-latin-italic.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
 :root{
   --navy:      #14294a;   /* azul marino del logo (f'c) */
   --navy-2:    #24476f;   /* azul marino claro */
@@ -16,7 +31,7 @@
 html{scroll-behavior:smooth}
 body{
   margin:0;
-  font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",system-ui,Roboto,Helvetica,Arial,sans-serif;
   color:var(--ink);
   background:var(--white);
   line-height:1.55;
@@ -264,6 +279,7 @@ img{max-width:100%}
 .spec{display:flex;flex-direction:column}
 .spec label{font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
 .spec b{font-size:.95rem;color:var(--ink);font-weight:600}
+.spec .nw{white-space:nowrap}   /* un código de norma no se parte en su guion */
 /* Autoría cuando el cálculo no es nuestro: quién calculó y quién modeló */
 .credit{margin:0 0 14px;font-size:.8rem;line-height:1.45;color:var(--muted)}
 .credit span{display:block}

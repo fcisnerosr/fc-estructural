@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estación de carburación — f'c estructural</title>
+<meta name="description" content="Estación de carburación (San Andrés Tuxtla, Ver.): modelo estructural en 3D. f'c estructural.">
+<link rel="stylesheet" href="../visor.css?v=1">
+<script>
+(function(){try{
+  var s=localStorage.getItem('theme');
+  var d=s||((window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
+  document.documentElement.setAttribute('data-theme',d);
+}catch(e){document.documentElement.setAttribute('data-theme','light');}})();
+</script>
+</head>
+<body>
+<header class="vh">
+  <a class="marca" href="../../#proyectos" title="Volver a los proyectos">
+    <img src="../../assets/logo_fcr_nav.png" alt="f'c estructural">
+    <span><b>f'c estructural</b><small>Análisis y diseño estructural</small></span>
+  </a>
+  <span class="sep"></span>
+  <div class="proy">
+    <small>Dictamen estructural</small>
+    <h1>Estación de carburación</h1>
+    <div class="lugar">📍 San Andrés Tuxtla, Ver.</div>
+  </div>
+  <div class="acc">
+    <button class="boton ico" id="tema" type="button" aria-label="Cambiar tema" title="Tema claro / oscuro">🌙</button>
+    <a class="boton" href="../../#proyectos" aria-label="Volver a los proyectos">←<span class="txt"> Proyectos</span></a>
+  </div>
+</header>
+<main class="vm">
+  <section class="lienzo">
+    <div id="plot" role="img" aria-label="Modelo 3D de Estación de carburación"></div>
+    <p class="ayuda">Arrastra para girar · rueda para acercar · pasa el cursor sobre un elemento</p>
+    <nav class="vistas" aria-label="Vistas">
+      <button type="button" data-vista="iso" class="on">3D</button>
+      <button type="button" data-vista="planta">Planta</button>
+      <button type="button" data-vista="frente">Frente</button>
+      <button type="button" data-vista="lado">Lado</button>
+      <button type="button" class="capas-btn">Capas</button>
+    </nav>
+  </section>
+  <aside class="panel" aria-label="Capas del modelo">
+    <button class="cerrar" type="button" aria-label="Cerrar">×</button>
+    <h2>Capas del modelo <span id="cuenta"></span></h2>
+    <div id="capas"></div>
+    <div class="todo"><button type="button" id="todas">Mostrar todas</button><button type="button" id="ninguna">Ocultar todas</button></div>
+    <p class="nota">Modelo de consulta: se explora en línea y no se descarga.</p>
+  </aside>
+</main>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<script src="modelo.js?v=1"></script>
+<script src="../visor.js?v=1"></script>
+</body>
+</html>

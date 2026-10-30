@@ -1,0 +1,141 @@
+/* ===== f'c estructural — visor 3D de los proyectos =====
+   Lo comparten todos los modelos de modelos/<proyecto>/: la página de cada uno
+   solo trae su título y su modelo.js. Los colores repiten los del sitio
+   (assets/style.css) para que el visor se sienta parte de él. */
+
+@font-face{
+  font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;
+  src:url("../assets/fonts/inter-latin.woff2") format("woff2");
+}
+:root{
+  --navy:#14294a; --accent:#2f6fb0; --ink:#1b1f24; --muted:#6b7480;
+  --bg:#eef2f6; --card:#ffffff; --line:#e3e7ee; --chip:#f5f7fa;
+  --shadow:0 6px 22px rgba(20,41,74,.10); --radius:14px;
+}
+html[data-theme="dark"]{
+  --navy:#cfe0f5; --accent:#5b9be0; --ink:#e6ebf2; --muted:#9aa6b4;
+  --bg:#0d141c; --card:#15202b; --line:#26323f; --chip:#1b2835;
+  --shadow:0 6px 22px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",system-ui,Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--ink);
+  display:flex;flex-direction:column;overflow:hidden;
+  -webkit-text-size-adjust:100%;text-size-adjust:100%;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+
+/* ---------- encabezado ---------- */
+.vh{
+  display:flex;align-items:center;gap:16px;
+  margin:12px 12px 0;padding:10px 16px;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+}
+.vh .marca{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.vh .marca img{height:40px;width:auto;display:block}
+html[data-theme="dark"] .vh .marca img{background:#fff;border-radius:8px;padding:2px}
+.vh .marca b{display:block;font-size:1.02rem;color:var(--navy);line-height:1.1}
+.vh .marca small{display:block;font-size:.66rem;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+.vh .sep{width:1px;align-self:stretch;background:var(--line)}
+.vh .proy{flex:1;min-width:0}
+.vh .proy small{display:block;font-size:.66rem;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.vh .proy h1{margin:1px 0 0;font-size:1.12rem;color:var(--navy);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vh .proy .lugar{font-size:.8rem;color:var(--muted)}
+.vh .acc{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+.boton{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 14px;border-radius:10px;font-size:.86rem;font-weight:600;line-height:1;
+  border:1px solid var(--line);background:var(--chip);cursor:pointer;white-space:nowrap;
+  transition:border-color .15s ease,background .15s ease,transform .15s ease;
+}
+.boton:hover{border-color:var(--accent)}
+.boton.prim{background:var(--accent);border-color:var(--accent);color:#fff}
+.boton.prim:hover{transform:translateY(-1px)}
+.boton.ico{padding:8px 10px}
+
+/* ---------- cuerpo: modelo + panel ---------- */
+.vm{flex:1;min-height:0;display:grid;grid-template-columns:1fr 290px;gap:12px;padding:12px}
+.lienzo{
+  position:relative;min-height:0;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  overflow:hidden;
+}
+#plot{position:absolute;inset:0}
+.vistas{
+  position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:5;
+  display:flex;gap:4px;padding:5px;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);
+}
+.vistas button{
+  border:0;background:transparent;padding:7px 12px;border-radius:8px;
+  font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer;
+}
+.vistas button:hover{color:var(--ink);background:var(--chip)}
+.vistas button.on{background:var(--accent);color:#fff}
+.vistas .capas-btn{display:none}
+.ayuda{
+  position:absolute;left:14px;top:12px;z-index:5;margin:0;
+  font-size:.74rem;color:var(--muted);
+  background:color-mix(in srgb,var(--card) 85%,transparent);padding:4px 8px;border-radius:8px;
+  pointer-events:none;
+}
+
+.panel{
+  min-height:0;overflow:auto;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 14px 16px;
+}
+.panel h2{
+  margin:0 0 10px;font-size:.74rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.panel h2 span{font-size:.7rem;letter-spacing:0;text-transform:none;font-weight:600;
+  background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:1px 8px}
+.capa{
+  display:flex;align-items:center;gap:10px;width:100%;
+  padding:7px 8px;margin:0 0 2px;border-radius:8px;cursor:pointer;
+  font-size:.86rem;user-select:none;
+}
+.capa:hover{background:var(--chip)}
+.capa input{width:16px;height:16px;margin:0;accent-color:var(--accent);flex:0 0 auto}
+.capa i{width:12px;height:12px;border-radius:3px;flex:0 0 auto;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.capa.off span{color:var(--muted);text-decoration:line-through}
+.panel .todo{display:flex;gap:6px;margin:10px 0 0}
+.panel .todo button{flex:1;font-size:.76rem;padding:6px;border-radius:8px;border:1px solid var(--line);background:var(--chip);cursor:pointer}
+.panel .nota{margin:14px 0 0;font-size:.74rem;line-height:1.45;color:var(--muted)}
+.panel .cerrar{display:none}
+
+/* ---------- celular ---------- */
+@media (max-width:820px){
+  .vh{margin:8px 8px 0;padding:8px 10px;gap:10px}
+  .vh .marca small,.vh .marca b,.vh .sep{display:none}
+  .vh .marca img{height:34px}
+  .vh .proy h1{font-size:.98rem;white-space:normal;line-height:1.15}
+  .vh .proy small{display:none}
+  .vh .acc .txt{display:none}
+  .boton{padding:8px 10px}
+  .vm{grid-template-columns:1fr;padding:8px}
+  .vistas{bottom:10px;max-width:calc(100% - 20px)}
+  .vistas button{padding:8px 10px}
+  .vistas .capas-btn{display:block;border-left:1px solid var(--line);border-radius:0 8px 8px 0}
+  .ayuda{display:none}
+  .panel{
+    position:fixed;left:8px;right:8px;bottom:8px;z-index:20;max-height:62vh;
+    transform:translateY(calc(100% + 16px));transition:transform .22s ease;
+    padding-bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  }
+  .panel.abierto{transform:none}
+  .panel h2{padding-right:34px}
+  .panel .cerrar{display:block;position:absolute;right:10px;top:8px;border:0;background:transparent;
+    font-size:1.3rem;line-height:1;padding:4px 8px;color:var(--muted);cursor:pointer}
+}
+
+/* ---------- modo captura (portada de la tarjeta) ---------- */
+html.captura body{background:#fff}
+html.captura .vh,html.captura .panel,html.captura .vistas,html.captura .ayuda{display:none}
+html.captura .vm{padding:0;grid-template-columns:1fr}
+html.captura .lienzo{border:0;border-radius:0;box-shadow:none}

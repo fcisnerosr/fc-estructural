@@ -222,6 +222,7 @@ img{max-width:100%}
 }
 .svc h3{margin:0 0 8px;font-size:1.12rem;color:var(--navy)}
 .svc p{margin:0;color:var(--muted);font-size:.92rem}
+.svc p.svc-when{margin:0 0 4px;font-size:.68rem;letter-spacing:.7px;text-transform:uppercase;font-weight:700;color:var(--accent)}   /* curso o plática, y su fecha */
 
 /* --- Dictamen estructural: tarjeta destacada (ocupa toda la fila) --- */
 .svc-feature{
@@ -274,12 +275,8 @@ img{max-width:100%}
 .card-body{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
 .card h3{margin:0 0 2px;font-size:1.12rem;color:var(--navy)}
 .card .loc{color:var(--muted);font-size:.86rem;margin-bottom:12px}
-.star{color:#e0a400}
-.specs{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin:0 0 14px}
-.spec{display:flex;flex-direction:column}
-.spec label{font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
-.spec b{font-size:.95rem;color:var(--ink);font-weight:600}
-.spec .nw{white-space:nowrap}   /* un código de norma no se parte en su guion */
+/* Qué trabajo fue: dictamen, diseño, rehabilitación. Sin datos técnicos: la tarjeta lleva al modelo y a los planos */
+.card .kind{margin:0 0 4px;font-size:.68rem;letter-spacing:.7px;text-transform:uppercase;font-weight:700;color:var(--accent)}
 /* Autoría cuando el cálculo no es nuestro: quién calculó y quién modeló */
 .credit{margin:0 0 14px;font-size:.8rem;line-height:1.45;color:var(--muted)}
 .credit span{display:block}
@@ -485,7 +482,6 @@ html[data-theme="dark"] .svc h3,
 html[data-theme="dark"] .profile h2,
 html[data-theme="dark"] .method h2,
 html[data-theme="dark"] .steps li b,
-html[data-theme="dark"] .spec b{color:#e6ebf2}
 html[data-theme="dark"] .profile p,
 html[data-theme="dark"] .profile li{color:#c7d1de}
 
@@ -634,8 +630,6 @@ html.anim .contact-qr:not(.is-visible){
   .models{gap:18px}
   .card-body{padding:16px 16px 18px}
   .card h3{font-size:1.06rem;line-height:1.32}
-  .specs{gap:10px 14px;margin-bottom:16px}
-  .spec b{font-size:.92rem}
   .card-foot{gap:14px}
   .btn{padding:10px 14px;font-size:.85rem}   /* objetivo táctil cómodo */
   .qr-box img{width:70px;height:70px}
@@ -910,14 +904,6 @@ html[data-theme="dark"]{
     inset 0 0 0 1px rgba(255,255,255,.24),
     0 6px 16px rgba(20,41,74,.30);
 }
-
-/* ---------- Ficha de datos del modelo: lámina interior ---------- */
-.specs{
-  background:var(--glass-soft);
-  border-radius:12px;padding:13px 14px;
-  box-shadow:inset 0 0 0 1px var(--glass-edge);
-}
-
 
 .qr-box img{
   border:0;background:#fff;padding:5px;

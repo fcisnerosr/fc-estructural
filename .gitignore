@@ -6,3 +6,6 @@ Thumbs.db
 # originales de la firma: el sitio usa la versión procesada en assets/img/firma.png
 /firma.png
 /firma2.png
+
+# caché de Python de herramientas/
+__pycache__/

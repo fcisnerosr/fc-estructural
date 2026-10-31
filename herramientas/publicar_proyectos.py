@@ -417,10 +417,12 @@ PAGINA = """<!DOCTYPE html>
 <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 <script src="modelo.js?v={v}"></script>
 <script src="../visor.js?v={v}"></script>
+<script data-goatcounter="https://fc-estructural.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
 """
-BOTON_PLANOS = ('    <a class="boton prim" href="planos.pdf?v={v}" target="_blank" rel="noopener">'
+BOTON_PLANOS = ('    <a class="boton prim" href="planos.pdf?v={v}" target="_blank" rel="noopener" '
+                'data-goatcounter-click="planos-{slug}">'
                 '📄 Planos<span class="txt"> (PDF)</span></a>\n')
 
 
@@ -438,7 +440,7 @@ def escribir_visor(p, capas, salida, v):
     (salida / "index.html").write_text(PAGINA.format(
         titulo=html.escape(p["titulo"]), lugar=html.escape(p["lugar"]), tipo=html.escape(p["tipo"]), v=v,
         y_planos=" y planos estructurales en PDF" if hay_planos else "",
-        boton_planos=BOTON_PLANOS.format(v=v) if hay_planos else ""), encoding="utf-8")
+        boton_planos=BOTON_PLANOS.format(v=v, slug=p["slug"]) if hay_planos else ""), encoding="utf-8")
     piezas = sum(len(set(c.T)) for c in capas)
     print(f"  visor: {len(grupos)} capas, {len(etiquetas)} etiquetas, "
           f"{(salida / 'modelo.js').stat().st_size / 1e3:.0f} kB ({piezas} piezas distintas)")
@@ -498,7 +500,7 @@ def escribir_planos(p, carpeta, salida):
 # ── QR y portada ────────────────────────────────────────────────────────────────────────────────
 def escribir_qr(p):
     q = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_M, box_size=10, border=2)
-    q.add_data(f"{URL}modelos/{p['slug']}/")
+    q.add_data(f"{URL}modelos/{p['slug']}/?ref=qr")   # GoatCounter cuenta la visita como «qr»
     q.make(fit=True)
     q.make_image(image_factory=PilImage, fill_color=NAVY, back_color="white").save(
         SITIO / "assets" / "qr" / f"{p['slug']}.png")

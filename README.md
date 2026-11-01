@@ -14,6 +14,8 @@ en 3D, que se explora en el navegador, y sus planos estructurales en PDF.
 - `assets/` — estilos, logo y códigos QR.
 - `herramientas/publicar_proyectos.py` — genera todo lo de `modelos/<slug>/` y el QR a partir
   del expediente en `~/github/despacho`.
+- `ESTADISTICAS.md` — las visitas del sitio: dónde verlas (GoatCounter), qué se cuenta y cómo está
+  instalado.
 
 ## Publicar o actualizar un proyecto
 
